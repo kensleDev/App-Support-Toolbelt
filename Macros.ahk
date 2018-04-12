@@ -6,7 +6,7 @@
 
     ; READ IN SETTINGS
 
-      SETTINGS := "D:\Dev\AHK\newMacroTool\Settings.txt"
+      SETTINGS := "D:\Dev\AHK\MacroTool\Settings.txt"
 
       SETTING := {}
 
@@ -23,10 +23,6 @@
       SETTING.BM4 := readAndFilter(19)
       SETTING.BM5 := readAndFilter(20)
       SETTING.BM6 := readAndFilter(21)
-
-      TEST := SETTING.BM1
-
-      MsgBox, %TEST%
 
       SETTING.APP1 := readAndFilter(26)
       SETTING.APP2 := readAndFilter(27)

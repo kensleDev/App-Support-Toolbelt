@@ -13,6 +13,8 @@ It has 2 optional dependancies which are:
 
 ## General Info
 
+- You will need to edit line 9 of Macros.ahk has the correct file path for Settings.txt
+
 - This script works by disabling the caps lock keys functionaily and using it as a modifer key.
 
 - The Caps lock key can still be enabled by pressing shift + Capslock which saves me alot of frustration not being able to hit Caps by mistake.
