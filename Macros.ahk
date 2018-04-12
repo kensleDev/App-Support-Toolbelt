@@ -38,6 +38,21 @@
       SETTING.FOLDER5 := readAndFilter(40)
       SETTING.FOLDER6 := readAndFilter(41)
 
+      SETTING.BM_MENU := readAndFilter(46)
+      SETTING.APP_MENU := readAndFilter(47)
+      SETTING.FOLDER_MENU := readAndFilter(48)
+
+      SETTING.BM_MENU_TEST := readAndFilter(50)
+
+      MENU := SETTING.BM_MENU_TEST
+
+      StringSplit, BM_MENU_ITEMS, MENU , Delimiters, OmitChars
+
+
+      assembleMenu(MENU)
+
+      ; MsgBox, %MENU%
+
     ; --|
 
     ; Keyboard Detection
@@ -168,6 +183,10 @@
       Send {Blind}{LAlt Up}
       Send {Blind}{LShift Up}
       Send {Blind}{%key% Up}
+    }
+
+    assembleMenu(menuItems) {
+      MsgBox, %menuItems%
     }
 
     GroupAdd, BrowserGroup, ahk_class Chrome_WidgetWin_1
@@ -339,15 +358,14 @@
     appBank() {
 
       Global SETTINGS
+      THE_MENU := SETTING.APP_MENU
+      app1 := SETTING.APP1
+      app2 := SETTING.APP2
+      app3 := SETTING.APP3
+      app4 := SETTING.APP4
+      app5 := SETTING.APP5
+      app6 := SETTING.APP6
 
-      FileReadLine, app1, %SETTINGS%, 17
-      FileReadLine, app2, %SETTINGS%, 19
-      FileReadLine, app3, %SETTINGS%, 21
-      FileReadLine, app4, %SETTINGS%, 23
-      FileReadLine, app5, %SETTINGS%, 25
-      FileReadLine, app6, %SETTINGS%, 27
-
-      THE_MENU=(a)-VSCode`n(s)-Chrome`n(d)-Cmder
       ToolTip, %THE_MENU%
 
       Input Key, L1
@@ -386,6 +404,7 @@
     folderBank() {
 
       Global SETTING
+      THE_MENU := SETTING.FOLDER_MENU
       folder1 := SETTING.FOLDER1
       folder2 := SETTING.FOLDER2
       folder3 := SETTING.FOLDER3
@@ -393,7 +412,6 @@
       folder5 := SETTING.FOLDER5
       folder6 := SETTING.FOLDER6
 
-      THE_MENU=(a)-Home`n(s)-Downloads`n(d)-Dev
       ToolTip, %THE_MENU#%
 
       Input Key, L1
@@ -432,6 +450,7 @@
     bookmarkBank() {
 
       Global SETTING
+      THE_MENU := SETTING.BM_MENU
       link1 := SETTING.BM1
       link2 := SETTING.BM2
       link3 := SETTING.BM3
@@ -439,7 +458,8 @@
       link5 := SETTING.BM5
       link6 := SETTING.BM6
 
-      THE_MENU=(a)-MyQ`n(s)-TheQ`n(d)-Me`n(z)-Awaiting User`n(x)-Awaiting Change`n(c)-Our Changes
+      MsgBox %THE_MENU%
+
       ToolTip, %THE_MENU%
 
       Input Key, L1
