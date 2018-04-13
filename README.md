@@ -13,7 +13,7 @@ It has 2 optional dependancies which are:
 
 ## General Info
 
-- You will need to edit line 9 of Macros.ahk has the correct file path for Settings.txt
+- You will need to edit line 3 of Macros.ahk has the correct file path for Settings.txt
 
 - This script works by disabling the caps lock keys functionaily and using it as a modifer key.
 
@@ -23,7 +23,7 @@ It has 2 optional dependancies which are:
 
 - The settings file (included in this directory) is line sensitive. This means that the line numbers cannot change or it will break the application. Bare this in mind when making changes
 
-- The settings file reads you select after the _ . I tried using a space or colon but AHK does not like this. So from the following it will read "a" : `btn1_a`
+- The settings file reads anything that comes after the _ . I tried using a space or colon but AHK does not like this. So from the following it will read "a" : `btn1_a`
 
 
 
@@ -92,8 +92,8 @@ Open the input/clipboard search menu with a single/double press.
 
 # TODO
 
-- Add menus to settings file
 - Clipx not launching
 - Change Launch lintalist to MOD+x
+- Make Settings easier to use, GUI ?
 
 

@@ -1,59 +1,57 @@
-
 ; -------------------------> Global
 
+  SETTINGS := "D:\Dev\AHK\MacroTool\Settings.txt"
+
+  ; ---> READ IN SETTINGS
+
+
+    SETTING := {}
+    MENUS := {}
+
+    SETTING.HK1 := readAndFilter(6)
+    SETTING.HK2 := readAndFilter(7)
+    SETTING.HK3 := readAndFilter(8)
+    SETTING.HK4 := readAndFilter(9)
+    SETTING.HK5 := readAndFilter(10)
+    SETTING.HK6 := readAndFilter(11)
+
+    SETTING.BM1 := readAndFilter(16)
+    SETTING.BM2 := readAndFilter(17)
+    SETTING.BM3 := readAndFilter(18)
+    SETTING.BM4 := readAndFilter(19)
+    SETTING.BM5 := readAndFilter(20)
+    SETTING.BM6 := readAndFilter(21)
+
+    SETTING.APP1 := readAndFilter(26)
+    SETTING.APP2 := readAndFilter(27)
+    SETTING.APP3 := readAndFilter(28)
+    SETTING.APP4 := readAndFilter(29)
+    SETTING.APP5 := readAndFilter(30)
+    SETTING.APP6 := readAndFilter(31)
+
+    SETTING.FOLDER1 := readAndFilter(36)
+    SETTING.FOLDER2 := readAndFilter(37)
+    SETTING.FOLDER3 := readAndFilter(38)
+    SETTING.FOLDER4 := readAndFilter(39)
+    SETTING.FOLDER5 := readAndFilter(40)
+    SETTING.FOLDER6 := readAndFilter(41)
+
+    SETTING.BM_MENU := readAndFilter(46)
+    SETTING.APP_MENU := readAndFilter(47)
+    SETTING.FOLDER_MENU := readAndFilter(48)
+
+    MENUS.BM := menuSplitter(SETTING.BM_MENU)
+    MENUS.APP := menuSplitter(SETTING.APP_MENU)
+    MENUS.FOLDER := menuSplitter(SETTING.FOLDER_MENU)
+
+    MENUS.BM := assembleMenu(MENUS.BM)
+    MENUS.APP := assembleMenu(MENUS.APP)
+    MENUS.FOLDER := assembleMenu(MENUS.FOLDER)
+
+
+  ; --|
 
   ; ---> Init
-
-    ; READ IN SETTINGS
-
-      SETTINGS := "D:\Dev\AHK\MacroTool\Settings.txt"
-
-      SETTING := {}
-      MENUS := {}
-
-      SETTING.HK1 := readAndFilter(6)
-      SETTING.HK2 := readAndFilter(7)
-      SETTING.HK3 := readAndFilter(8)
-      SETTING.HK4 := readAndFilter(9)
-      SETTING.HK5 := readAndFilter(10)
-      SETTING.HK6 := readAndFilter(11)
-
-      SETTING.BM1 := readAndFilter(16)
-      SETTING.BM2 := readAndFilter(17)
-      SETTING.BM3 := readAndFilter(18)
-      SETTING.BM4 := readAndFilter(19)
-      SETTING.BM5 := readAndFilter(20)
-      SETTING.BM6 := readAndFilter(21)
-
-      SETTING.APP1 := readAndFilter(26)
-      SETTING.APP2 := readAndFilter(27)
-      SETTING.APP3 := readAndFilter(28)
-      SETTING.APP4 := readAndFilter(29)
-      SETTING.APP5 := readAndFilter(30)
-      SETTING.APP6 := readAndFilter(31)
-
-      SETTING.FOLDER1 := readAndFilter(36)
-      SETTING.FOLDER2 := readAndFilter(37)
-      SETTING.FOLDER3 := readAndFilter(38)
-      SETTING.FOLDER4 := readAndFilter(39)
-      SETTING.FOLDER5 := readAndFilter(40)
-      SETTING.FOLDER6 := readAndFilter(41)
-
-      SETTING.BM_MENU := readAndFilter(46)
-      SETTING.APP_MENU := readAndFilter(47)
-      SETTING.FOLDER_MENU := readAndFilter(48)
-
-      MENUS.BM := menuSplitter(SETTING.BM_MENU)
-      MENUS.APP := menuSplitter(SETTING.APP_MENU)
-      MENUS.FOLDER := menuSplitter(SETTING.FOLDER_MENU)
-
-      MENUS.BM := assembleMenu(MENUS.BM)
-
-      ; MsgBox % MENUS.BM.1
-
-      ; MsgBox, %MENU%
-
-    ; --|
 
     ; Keyboard Detection
       FileReadLine, keyboardType, C:\Dev\os.txt, 1
@@ -130,31 +128,6 @@
 
   ; --|
 
-  ; ---> File Ops
-    regexer(bank, haystack) {
-
-      If (bank = "Settings")
-        RegExMatch(haystack, "(?<=_)[a-zA-Z0-9].*" , output)
-      Else If (bank = "none")
-        output := haystack
-      Return, %output%
-    }
-
-    lineReader(lineNum) {
-      Global SETTINGS
-      FileReadLine, output, %SETTINGS%, %lineNum%
-      Return, %output%
-
-    }
-
-    readAndFilter(lineNum) {
-      bank := "Settings"
-      line := lineReader(lineNum)
-      line := regexer(bank, line)
-      Return, line
-    }
-  ; --|
-
   ; ---> General
     CenterImgSrchCoords(File, ByRef CoordX, ByRef CoordY) {
       static LoadedPic
@@ -185,16 +158,6 @@
       Send {Blind}{%key% Up}
     }
 
-    menuSplitter(menu) {
-      ARRAY := StrSplit(menu , ",")
-      Return, Array
-    }
-
-    assembleMenu(menu) {
-      Global SETTING
-      THE_MENU := SETTING.HK1 menu.1
-      MsgBox, % THE_MENU
-    }
 
     GroupAdd, BrowserGroup, ahk_class Chrome_WidgetWin_1
     GroupAdd, BrowserGroup, ahk_class MozillaWindowClass
@@ -274,6 +237,62 @@
         WinActivate, ahk_pid %PID%
       }
       ;SetTimer, RunOrActivateTrayTipOff, 1
+    }
+  ; --|
+
+  ; ---> Menus
+    menuSplitter(menu) {
+      ARRAY := StrSplit(menu , ",")
+      Return, Array
+    }
+
+    assembleMenu(menu) {
+      Global SETTING
+      Space := " "
+      NL := "`n"
+
+      HK1 := assbleMenuItem(SETTING.HK1)
+      HK2 := assbleMenuItem(SETTING.HK2)
+      HK3 := assbleMenuItem(SETTING.HK3)
+      HK4 := assbleMenuItem(SETTING.HK4)
+      HK5 := assbleMenuItem(SETTING.HK5)
+      HK6 := assbleMenuItem(SETTING.HK6)
+
+      THE_MENU := HK1 Space menu.1  NL HK2 Space menu.2 NL HK3 Space menu.3 NL HK4 Space menu.4 NL HK5 Space menu.5 NL HK6 Space menu.6
+      Return, % THE_MENU
+    }
+
+    assbleMenuItem(item) {
+      O := "("
+      C := ") - "
+
+      Return, O item C
+    }
+
+  ; --|
+
+  ; ---> File Ops
+    regexer(bank, haystack) {
+
+      If (bank = "Settings")
+        RegExMatch(haystack, "(?<=_)[a-zA-Z0-9].*" , output)
+      Else If (bank = "none")
+        output := haystack
+      Return, %output%
+    }
+
+    lineReader(lineNum) {
+      Global SETTINGS
+      FileReadLine, output, %SETTINGS%, %lineNum%
+      Return, %output%
+
+    }
+
+    readAndFilter(lineNum) {
+      bank := "Settings"
+      line := lineReader(lineNum)
+      line := regexer(bank, line)
+      Return, line
     }
   ; --|
 
@@ -365,7 +384,8 @@
     appBank() {
 
       Global SETTINGS
-      THE_MENU := SETTING.APP_MENU
+      Global MENUS
+
       app1 := SETTING.APP1
       app2 := SETTING.APP2
       app3 := SETTING.APP3
@@ -373,7 +393,7 @@
       app5 := SETTING.APP5
       app6 := SETTING.APP6
 
-      ToolTip, %THE_MENU%
+      ToolTip % MENUS.APP
 
       Input Key, L1
         CloseToolTip()
@@ -411,7 +431,8 @@
     folderBank() {
 
       Global SETTING
-      THE_MENU := SETTING.FOLDER_MENU
+      Global MENUS
+
       folder1 := SETTING.FOLDER1
       folder2 := SETTING.FOLDER2
       folder3 := SETTING.FOLDER3
@@ -419,7 +440,7 @@
       folder5 := SETTING.FOLDER5
       folder6 := SETTING.FOLDER6
 
-      ToolTip, %THE_MENU#%
+      ToolTip % MENUS.FOLDER
 
       Input Key, L1
         CloseToolTip()
@@ -457,7 +478,8 @@
     bookmarkBank() {
 
       Global SETTING
-      THE_MENU := SETTING.BM_MENU
+      Global MENUS
+
       link1 := SETTING.BM1
       link2 := SETTING.BM2
       link3 := SETTING.BM3
@@ -465,9 +487,7 @@
       link5 := SETTING.BM5
       link6 := SETTING.BM6
 
-      MsgBox %THE_MENU%
-
-      ToolTip, %THE_MENU%
+      ToolTip % MENUS.BM
 
       Input Key, L1
         CloseToolTip()
@@ -685,3 +705,4 @@
   ; --|
 
 ; --|
+
