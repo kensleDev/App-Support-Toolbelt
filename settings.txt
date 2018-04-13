@@ -43,8 +43,7 @@ folder6_undefined
 -------------
 -> MENUS
 -------------
-bmMenu_a - MyQ`ns-TheQ`nd-Me`nz-Awaiting User`nx-Awaiting Change`nc-Our Changes
-appMenu_(a)-VSCode`n(s)-Chrome`n(d)-Cmder
-folderMenu_test
+bmMenu_MyQ,TheQ,Me,Awaiting User,Awaiting Change,Our Changes
+appMenu_VSCode,Chrome,Cmder
+folderMenu_Home,Downloads,Dev
 
-bmMenuTest_MyQ,TheQ,Me,Awaiting User,Awaiting Change,Our Changes

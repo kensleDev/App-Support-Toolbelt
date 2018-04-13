@@ -93,6 +93,7 @@ Open the input/clipboard search menu with a single/double press.
 # TODO
 
 - Add menus to settings file
+- Clipx not launching
 - Change Launch lintalist to MOD+x
 
 

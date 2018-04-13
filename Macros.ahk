@@ -9,6 +9,7 @@
       SETTINGS := "D:\Dev\AHK\MacroTool\Settings.txt"
 
       SETTING := {}
+      MENUS := {}
 
       SETTING.HK1 := readAndFilter(6)
       SETTING.HK2 := readAndFilter(7)
@@ -42,14 +43,13 @@
       SETTING.APP_MENU := readAndFilter(47)
       SETTING.FOLDER_MENU := readAndFilter(48)
 
-      SETTING.BM_MENU_TEST := readAndFilter(50)
+      MENUS.BM := menuSplitter(SETTING.BM_MENU)
+      MENUS.APP := menuSplitter(SETTING.APP_MENU)
+      MENUS.FOLDER := menuSplitter(SETTING.FOLDER_MENU)
 
-      MENU := SETTING.BM_MENU_TEST
+      MENUS.BM := assembleMenu(MENUS.BM)
 
-      StringSplit, BM_MENU_ITEMS, MENU , Delimiters, OmitChars
-
-
-      assembleMenu(MENU)
+      ; MsgBox % MENUS.BM.1
 
       ; MsgBox, %MENU%
 
@@ -185,8 +185,15 @@
       Send {Blind}{%key% Up}
     }
 
-    assembleMenu(menuItems) {
-      MsgBox, %menuItems%
+    menuSplitter(menu) {
+      ARRAY := StrSplit(menu , ",")
+      Return, Array
+    }
+
+    assembleMenu(menu) {
+      Global SETTING
+      THE_MENU := SETTING.HK1 menu.1
+      MsgBox, % THE_MENU
     }
 
     GroupAdd, BrowserGroup, ahk_class Chrome_WidgetWin_1
