@@ -294,6 +294,12 @@
       line := regexer(bank, line)
       Return, line
     }
+
+    IniReader(key, value) {
+      Global SETTINGS
+      IniRead, OUTPUT, %SETTINGS%, %key%, %value%
+      Return, %OUTPUT%
+    }
   ; --|
 
 
