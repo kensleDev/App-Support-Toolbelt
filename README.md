@@ -91,7 +91,9 @@ Open the input/clipboard search menu with a single/double press.
 # TODO
 
 - Change Launch lintalist to MOD+x
+- Dynamic menu generation
 - Now everythings hooked up and works I want to refactor code to use loops/ functions to optimise and cut down on repeated code.
+
 
 
 

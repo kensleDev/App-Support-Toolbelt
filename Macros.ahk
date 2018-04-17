@@ -3,43 +3,49 @@
   FILENAME := "/Settings.ini"
   SETTINGS = %A_WorkingDir%%FILENAME%
 
+  IniReader(key, value) {
+    Global SETTINGS
+    IniRead, OUTPUT, %SETTINGS%, %key%, %value%
+    Return, %OUTPUT%
+  }
+
   ; ---> READ IN SETTINGS
 
 
     SETTING := {}
     MENUS := {}
 
-    SETTING.HK1 := readAndFilter(6)
-    SETTING.HK2 := readAndFilter(7)
-    SETTING.HK3 := readAndFilter(8)
-    SETTING.HK4 := readAndFilter(9)
-    SETTING.HK5 := readAndFilter(10)
-    SETTING.HK6 := readAndFilter(11)
+    SETTING.HK1 := IniReader("Hotkeys", "1")
+    SETTING.HK2 := IniReader("Hotkeys", "2")
+    SETTING.HK3 := IniReader("Hotkeys", "3")
+    SETTING.HK4 := IniReader("Hotkeys", "4")
+    SETTING.HK5 := IniReader("Hotkeys", "5")
+    SETTING.HK6 := IniReader("Hotkeys", "6")
 
-    SETTING.BM1 := readAndFilter(16)
-    SETTING.BM2 := readAndFilter(17)
-    SETTING.BM3 := readAndFilter(18)
-    SETTING.BM4 := readAndFilter(19)
-    SETTING.BM5 := readAndFilter(20)
-    SETTING.BM6 := readAndFilter(21)
+    SETTING.BM1 := IniReader("Bookmarks", "1")
+    SETTING.BM2 := IniReader("Bookmarks", "2")
+    SETTING.BM3 := IniReader("Bookmarks", "3")
+    SETTING.BM4 := IniReader("Bookmarks", "4")
+    SETTING.BM5 := IniReader("Bookmarks", "5")
+    SETTING.BM6 := IniReader("Bookmarks", "6")
 
-    SETTING.APP1 := readAndFilter(26)
-    SETTING.APP2 := readAndFilter(27)
-    SETTING.APP3 := readAndFilter(28)
-    SETTING.APP4 := readAndFilter(29)
-    SETTING.APP5 := readAndFilter(30)
-    SETTING.APP6 := readAndFilter(31)
+    SETTING.APP1 := IniReader("App", "1")
+    SETTING.APP2 := IniReader("App", "2")
+    SETTING.APP3 := IniReader("App", "3")
+    SETTING.APP4 := IniReader("App", "4")
+    SETTING.APP5 := IniReader("App", "5")
+    SETTING.APP6 := IniReader("App", "6")
 
-    SETTING.FOLDER1 := readAndFilter(36)
-    SETTING.FOLDER2 := readAndFilter(37)
-    SETTING.FOLDER3 := readAndFilter(38)
-    SETTING.FOLDER4 := readAndFilter(39)
-    SETTING.FOLDER5 := readAndFilter(40)
-    SETTING.FOLDER6 := readAndFilter(41)
+    SETTING.FOLDER1 := IniReader("Folder", "1")
+    SETTING.FOLDER2 := IniReader("Folder", "2")
+    SETTING.FOLDER3 := IniReader("Folder", "3")
+    SETTING.FOLDER4 := IniReader("Folder", "4")
+    SETTING.FOLDER5 := IniReader("Folder", "5")
+    SETTING.FOLDER6 := IniReader("Folder", "6")
 
-    SETTING.BM_MENU := readAndFilter(46)
-    SETTING.APP_MENU := readAndFilter(47)
-    SETTING.FOLDER_MENU := readAndFilter(48)
+    SETTING.BM_MENU := IniReader("Menus", "bmMenu")
+    SETTING.APP_MENU := IniReader("Menus", "appMenu")
+    SETTING.FOLDER_MENU := IniReader("Menus", "folderMenu")
 
     MENUS.BM := menuSplitter(SETTING.BM_MENU)
     MENUS.APP := menuSplitter(SETTING.APP_MENU)
@@ -294,12 +300,6 @@
       line := lineReader(lineNum)
       line := regexer(bank, line)
       Return, line
-    }
-
-    IniReader(key, value) {
-      Global SETTINGS
-      IniRead, OUTPUT, %SETTINGS%, %key%, %value%
-      Return, %OUTPUT%
     }
   ; --|
 
