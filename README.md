@@ -1,5 +1,5 @@
 
-# Handy Macros
+# App Support Toolbelt
 
 This script has been developed while doing application support to considerably speed up my workflow. Dispite of that it is extremley handy for day to day use of a windows machine.
 

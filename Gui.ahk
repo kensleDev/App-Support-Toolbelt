@@ -1,5 +1,4 @@
-﻿
-; --> Global
+﻿; --> Global
 
   FILENAME := "/Settings.ini"
   SETTINGS = %A_WorkingDir%%FILENAME%
@@ -46,6 +45,27 @@
     FOLDER5 := IniReader("Folders", "5")
     FOLDER6 := IniReader("Folders", "6")
 
+    M_BM_1 := IniReader("BMMenu", "1")
+    M_BM_2 := IniReader("BMMenu", "2")
+    M_BM_3 := IniReader("BMMenu", "3")
+    M_BM_4 := IniReader("BMMenu", "4")
+    M_BM_5 := IniReader("BMMenu", "5")
+    M_BM_6 := IniReader("BMMenu", "6")
+
+    M_APP_1 := IniReader("APPMenu", "1")
+    M_APP_2 := IniReader("APPMenu", "2")
+    M_APP_3 := IniReader("APPMenu", "3")
+    M_APP_4 := IniReader("APPMenu", "4")
+    M_APP_5 := IniReader("APPMenu", "5")
+    M_APP_6 := IniReader("APPMenu", "6")
+
+    M_FOLDER_1 := IniReader("FOLDERMenu", "1")
+    M_FOLDER_2 := IniReader("FOLDERMenu", "2")
+    M_FOLDER_3 := IniReader("FOLDERMenu", "3")
+    M_FOLDER_4 := IniReader("FOLDERMenu", "4")
+    M_FOLDER_5 := IniReader("FOLDERMenu", "5")
+    M_FOLDER_6 := IniReader("FOLDERMenu", "6")
+
   ; --|
 
 ;--|
@@ -59,7 +79,7 @@
 
   Gui Add, StatusBar,, Status Bar
   Gui Add, Tab3, x416 y256 w0 h0, Tab 1|Tab 2
-  Gui Add, Tab3, x8 y8 w536 h350, Hotkeys|BookMarks|Apps|Folders
+  Gui Add, Tab3, x8 y8 w536 h350, Hotkeys|BookMarks|Apps|Folders|Menus
   Gui Tab, 1, 2
   Gui Add, Text, x32 y48 w33 h23 +0x200 Center, 1
   Gui Add, Text, x32 y80 w33 h23 +0x200 Center, 2
@@ -120,6 +140,58 @@
   Gui Add, Edit, x72 y208 w411 h24 vmyEditFOLDER6
   Gui Add, Button, x32 y250 h30 w100 gsaveFolders, Save Folders
 
+  Gui Tab, 5, 2
+
+  GUI, FONT, S16
+  Gui Add, Text, x60 y48 w105 h23 +0x200 Center, Bookmarks
+  GUI, FONT, S10
+  Gui Add, Text, x32 y88 w33 h23 +0x200 Center, 1
+  Gui Add, Text, x32 y120 w33 h23 +0x200 Center, 2
+  Gui Add, Text, x32 y152 w33 h23 +0x200 Center, 3
+  Gui Add, Text, x32 y184 w33 h23 +0x200 Center, 4
+  Gui Add, Text, x32 y216 w33 h23 +0x200 Center, 5
+  Gui Add, Text, x32 y248 w33 h23 +0x200 Center, 6
+  Gui Add, Edit, x72 y88 w105 h24 vmyEditBMMENU1
+  Gui Add, Edit, x72 y120 w105 h24 vmyEditBMMENU2
+  Gui Add, Edit, x72 y152 w105 h24 vmyEditBMMENU3
+  Gui Add, Edit, x72 y184 w105 h24 vmyEditBMMENU4
+  Gui Add, Edit, x72 y216 w105 h24 vmyEditBMMENU5
+  Gui Add, Edit, x72 y248 w105 h24 vmyEditBMMENU6
+
+  GUI, FONT, S16
+  Gui Add, Text, x210 y48 w105 h23 +0x200 Center, Apps
+  GUI, FONT, S10
+  Gui Add, Text, x190 y88 w33 h23 +0x200 Center, 1
+  Gui Add, Text, x190 y120 w33 h23 +0x200 Center, 2
+  Gui Add, Text, x190 y152 w33 h23 +0x200 Center, 3
+  Gui Add, Text, x190 y184 w33 h23 +0x200 Center, 4
+  Gui Add, Text, x190 y216 w33 h23 +0x200 Center, 5
+  Gui Add, Text, x190 y248 w33 h23 +0x200 Center, 6
+  Gui Add, Edit, x230 y88 w105 h24 vmyEditAPPMENU1
+  Gui Add, Edit, x230 y120 w105 h24 vmyEditAPPMENU2
+  Gui Add, Edit, x230 y152 w105 h24 vmyEditAPPMENU3
+  Gui Add, Edit, x230 y184 w105 h24 vmyEditAPPMENU4
+  Gui Add, Edit, x230 y216 w105 h24 vmyEditAPPMENU5
+  Gui Add, Edit, x230 y248 w105 h24 vmyEditAPPMENU6
+
+  GUI, FONT, S16
+  Gui Add, Text, x380 y48 w105 h23 +0x200 Center, Folders
+  GUI, FONT, S10
+  Gui Add, Text, x350 y88 w33 h23 +0x200 Center, 1
+  Gui Add, Text, x350 y120 w33 h23 +0x200 Center, 2
+  Gui Add, Text, x350 y152 w33 h23 +0x200 Center, 3
+  Gui Add, Text, x350 y184 w33 h23 +0x200 Center, 4
+  Gui Add, Text, x350 y216 w33 h23 +0x200 Center, 5
+  Gui Add, Text, x350 y248 w33 h23 +0x200 Center, 6
+  Gui Add, Edit, x390 y88 w105 h24 vmyEditFOLDERMENU1
+  Gui Add, Edit, x390 y120 w105 h24 vmyEditFOLDERMENU2
+  Gui Add, Edit, x390 y152 w105 h24 vmyEditFOLDERMENU3
+  Gui Add, Edit, x390 y184 w105 h24 vmyEditFOLDERMENU4
+  Gui Add, Edit, x390 y216 w105 h24 vmyEditFOLDERMENU5
+  Gui Add, Edit, x390 y248 w105 h24 vmyEditFOLDERMENU6
+
+  Gui Add, Button, x32 y290 h30 w100 gsaveMenus, Save Menus!
+
   GuiControl,, myEditHK1, %HK1%
   GuiControl,, myEditHK2, %HK2%
   GuiControl,, myEditHK3, %HK3%
@@ -147,6 +219,27 @@
   GuiControl,, myEditFOLDER4, %FOLDER4%
   GuiControl,, myEditFOLDER5, %FOLDER5%
   GuiControl,, myEditFOLDER6, %FOLDER6%
+
+  GuiControl,, myEditBMMENU1, %M_BM_1%
+  GuiControl,, myEditBMMENU2, %M_BM_2%
+  GuiControl,, myEditBMMENU3, %M_BM_3%
+  GuiControl,, myEditBMMENU4, %M_BM_4%
+  GuiControl,, myEditBMMENU5, %M_BM_5%
+  GuiControl,, myEditBMMENU6, %M_BM_6%
+
+  GuiControl,, myEditAPPMENU1, %M_APP_1%
+  GuiControl,, myEditAPPMENU2, %M_APP_2%
+  GuiControl,, myEditAPPMENU3, %M_APP_3%
+  GuiControl,, myEditAPPMENU4, %M_APP_4%
+  GuiControl,, myEditAPPMENU5, %M_APP_5%
+  GuiControl,, myEditAPPMENU6, %M_APP_6%
+
+  GuiControl,, myEditFOLDERMENU1, %M_FOLDER_1%
+  GuiControl,, myEditFOLDERMENU2, %M_FOLDER_2%
+  GuiControl,, myEditFOLDERMENU3, %M_FOLDER_3%
+  GuiControl,, myEditFOLDERMENU4, %M_FOLDER_4%
+  GuiControl,, myEditFOLDERMENU5, %M_FOLDER_5%
+  GuiControl,, myEditFOLDERMENU6, %M_FOLDER_6%
 
 
   Gui Show, w550 h400, Window
@@ -230,5 +323,49 @@
 
   Return
 
-;--|
+  saveMenus:
+    guiControlGet, BM_M_1Var,, myEditBMMENU1
+    guiControlGet, BM_M_2Var,, myEditBMMENU2
+    guiControlGet, BM_M_3Var,, myEditBMMENU3
+    guiControlGet, BM_M_4Var,, myEditBMMENU4
+    guiControlGet, BM_M_5Var,, myEditBMMENU5
+    guiControlGet, BM_M_6Var,, myEditBMMENU6
+    IniSaver(BM_M_1Var, "BMMenu", "1")
+    IniSaver(BM_M_2Var, "BMMenu", "2")
+    IniSaver(BM_M_3Var, "BMMenu", "3")
+    IniSaver(BM_M_4Var, "BMMenu", "4")
+    IniSaver(BM_M_5Var, "BMMenu", "5")
+    IniSaver(BM_M_6Var, "BMMenu", "6")
 
+    guiControlGet, APP_M_1Var,, myEditAPPMENU1
+    guiControlGet, APP_M_2Var,, myEditAPPMENU2
+    guiControlGet, APP_M_3Var,, myEditAPPMENU3
+    guiControlGet, APP_M_4Var,, myEditAPPMENU4
+    guiControlGet, APP_M_5Var,, myEditAPPMENU5
+    guiControlGet, APP_M_6Var,, myEditAPPMENU6
+    IniSaver(APP_M_1Var, "APPMenu", "1")
+    IniSaver(APP_M_2Var, "APPMenu", "2")
+    IniSaver(APP_M_3Var, "APPMenu", "3")
+    IniSaver(APP_M_4Var, "APPMenu", "4")
+    IniSaver(APP_M_5Var, "APPMenu", "5")
+    IniSaver(APP_M_6Var, "APPMenu", "6")
+
+    guiControlGet, FOLDER_M_1Var,, myEditFOLDERMENU1
+    guiControlGet, FOLDER_M_2Var,, myEditFOLDERMENU2
+    guiControlGet, FOLDER_M_3Var,, myEditFOLDERMENU3
+    guiControlGet, FOLDER_M_4Var,, myEditFOLDERMENU4
+    guiControlGet, FOLDER_M_5Var,, myEditFOLDERMENU5
+    guiControlGet, FOLDER_M_6Var,, myEditFOLDERMENU6
+    IniSaver(FOLDER_M_1Var, "FOLDERMenu", "1")
+    IniSaver(FOLDER_M_2Var, "FOLDERMenu", "2")
+    IniSaver(FOLDER_M_3Var, "FOLDERMenu", "3")
+    IniSaver(FOLDER_M_4Var, "FOLDERMenu", "4")
+    IniSaver(FOLDER_M_5Var, "FOLDERMenu", "5")
+    IniSaver(FOLDER_M_6Var, "FOLDERMenu", "6")
+
+    MsgBox % "Menus Saved!"
+    Reload
+
+  Return
+
+;--|
