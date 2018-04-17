@@ -13,17 +13,13 @@ It has 2 optional dependancies which are:
 
 ## General Info
 
-- You will need to edit line 3 of Macros.ahk has the correct file path for Settings.txt
-
 - This script works by disabling the caps lock keys functionaily and using it as a modifer key.
 
 - The Caps lock key can still be enabled by pressing shift + Capslock which saves me alot of frustration not being able to hit Caps by mistake.
 
 - Also includes a couple of handy windows shortcuts
 
-- The settings file (included in this directory) is line sensitive. This means that the line numbers cannot change or it will break the application. Bare this in mind when making changes
-
-- The settings file reads anything that comes after the _ . I tried using a space or colon but AHK does not like this. So from the following it will read "a" : `btn1_a`
+- The settings are read from the settings.ini file in the root of this project which can be edited via the settings gui. This is launched with CAPS+C
 
 
 
@@ -45,6 +41,8 @@ It has 2 optional dependancies which are:
   |   |  |  |
   |  CAPS+Z | Single | Launch Clipx |
   |  CAPS+X | Double | Launch Lintalist |
+  |   |  |  |
+  |  CAPS+C | Single | Launch Settings |
   |   |  |  |
   |  Handy Shortcuts |  |  |
   |   |  |  |
@@ -92,8 +90,8 @@ Open the input/clipboard search menu with a single/double press.
 
 # TODO
 
-- Clipx not launching
 - Change Launch lintalist to MOD+x
-- Make Settings easier to use, GUI ?
+- Now everythings hooked up and works I want to refactor code to use loops/ functions to optimise and cut down on repeated code.
+
 
 

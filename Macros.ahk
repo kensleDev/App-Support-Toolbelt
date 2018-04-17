@@ -1,6 +1,7 @@
 ; -------------------------> Global
 
-  SETTINGS := "D:\Dev\AHK\MacroTool\Settings.txt"
+  FILENAME := "/Settings.ini"
+  SETTINGS = %A_WorkingDir%%FILENAME%
 
   ; ---> READ IN SETTINGS
 
