@@ -1,7 +1,8 @@
 ﻿
 ; --> Global
 
-  SETTINGS := "D:\Dev\AHK\MacroTool\Settings.ini"
+  FILENAME := "/Settings.ini"
+  SETTINGS = %A_WorkingDir%%FILENAME%
 
   IniReader(key, value) {
     Global SETTINGS
@@ -17,33 +18,33 @@
 
   ; --> Read in Settings from INI
 
-    HK1 := IniReader("Hotkeys", "hk1")
-    HK2 := IniReader("Hotkeys", "hk2")
-    HK3 := IniReader("Hotkeys", "hk3")
-    HK4 := IniReader("Hotkeys", "hk4")
-    HK5 := IniReader("Hotkeys", "hk5")
-    HK6 := IniReader("Hotkeys", "hk6")
+    HK1 := IniReader("Hotkeys", "1")
+    HK2 := IniReader("Hotkeys", "2")
+    HK3 := IniReader("Hotkeys", "3")
+    HK4 := IniReader("Hotkeys", "4")
+    HK5 := IniReader("Hotkeys", "5")
+    HK6 := IniReader("Hotkeys", "6")
 
-    BM1 := IniReader("Bookmarks", "bm1")
-    BM2 := IniReader("Bookmarks", "bm2")
-    BM3 := IniReader("Bookmarks", "bm3")
-    BM4 := IniReader("Bookmarks", "bm4")
-    BM5 := IniReader("Bookmarks", "bm5")
-    BM6 := IniReader("Bookmarks", "bm6")
+    BM1 := IniReader("Bookmarks", "1")
+    BM2 := IniReader("Bookmarks", "2")
+    BM3 := IniReader("Bookmarks", "3")
+    BM4 := IniReader("Bookmarks", "4")
+    BM5 := IniReader("Bookmarks", "5")
+    BM6 := IniReader("Bookmarks", "6")
 
-    APP1 := IniReader("Apps", "app1")
-    APP2 := IniReader("Apps", "app2")
-    APP3 := IniReader("Apps", "app3")
-    APP4 := IniReader("Apps", "app4")
-    APP5 := IniReader("Apps", "app5")
-    APP6 := IniReader("Apps", "app6")
+    APP1 := IniReader("Apps", "1")
+    APP2 := IniReader("Apps", "2")
+    APP3 := IniReader("Apps", "3")
+    APP4 := IniReader("Apps", "4")
+    APP5 := IniReader("Apps", "5")
+    APP6 := IniReader("Apps", "6")
 
-    FOLDER1 := IniReader("Folders", "folder1")
-    FOLDER2 := IniReader("Folders", "folder2")
-    FOLDER3 := IniReader("Folders", "folder3")
-    FOLDER4 := IniReader("Folders", "folder4")
-    FOLDER5 := IniReader("Folders", "folder5")
-    FOLDER6 := IniReader("Folders", "folder6")
+    FOLDER1 := IniReader("Folders", "1")
+    FOLDER2 := IniReader("Folders", "2")
+    FOLDER3 := IniReader("Folders", "3")
+    FOLDER4 := IniReader("Folders", "4")
+    FOLDER5 := IniReader("Folders", "5")
+    FOLDER6 := IniReader("Folders", "6")
 
   ; --|
 
@@ -165,12 +166,12 @@
     guiControlGet, hk4Var,, myEditHK4
     guiControlGet, hk5Var,, myEditHK5
     guiControlGet, hk6Var,, myEditHK6
-    IniSaver(hk1Var, "Hotkeys", "hk1")
-    IniSaver(hk2Var, "Hotkeys", "hk2")
-    IniSaver(hk3Var, "Hotkeys", "hk3")
-    IniSaver(hk4Var, "Hotkeys", "hk4")
-    IniSaver(hk5Var, "Hotkeys", "hk5")
-    IniSaver(hk6Var, "Hotkeys", "hk6")
+    IniSaver(hk1Var, "Hotkeys", "1")
+    IniSaver(hk2Var, "Hotkeys", "2")
+    IniSaver(hk3Var, "Hotkeys", "3")
+    IniSaver(hk4Var, "Hotkeys", "4")
+    IniSaver(hk5Var, "Hotkeys", "5")
+    IniSaver(hk6Var, "Hotkeys", "6")
 
     MsgBox % "Hotkeys Saved!"
 
@@ -183,12 +184,12 @@
     guiControlGet, bm4Var,, myEditBM4
     guiControlGet, bm5Var,, myEditBM5
     guiControlGet, bm6Var,, myEditBM6
-    IniSaver(bm1Var, "Bookmarks", "bm1")
-    IniSaver(bm2Var, "Bookmarks", "bm2")
-    IniSaver(bm3Var, "Bookmarks", "bm3")
-    IniSaver(bm4Var, "Bookmarks", "bm4")
-    IniSaver(bm5Var, "Bookmarks", "bm5")
-    IniSaver(bm6Var, "Bookmarks", "bm6")
+    IniSaver(bm1Var, "Bookmarks", "1")
+    IniSaver(bm2Var, "Bookmarks", "2")
+    IniSaver(bm3Var, "Bookmarks", "3")
+    IniSaver(bm4Var, "Bookmarks", "4")
+    IniSaver(bm5Var, "Bookmarks", "5")
+    IniSaver(bm6Var, "Bookmarks", "6")
 
     MsgBox % "Bookmarks Saved!"
   Return
@@ -200,12 +201,12 @@
     guiControlGet, app4Var,, myEditAPP4
     guiControlGet, app5Var,, myEditAPP5
     guiControlGet, app6Var,, myEditAPP6
-    IniSaver(app1Var, "Apps", "app1")
-    IniSaver(app2Var, "Apps", "app2")
-    IniSaver(app3Var, "Apps", "app3")
-    IniSaver(app4Var, "Apps", "app4")
-    IniSaver(app5Var, "Apps", "app5")
-    IniSaver(app6Var, "Apps", "app6")
+    IniSaver(app1Var, "Apps", "1")
+    IniSaver(app2Var, "Apps", "2")
+    IniSaver(app3Var, "Apps", "3")
+    IniSaver(app4Var, "Apps", "4")
+    IniSaver(app5Var, "Apps", "5")
+    IniSaver(app6Var, "Apps", "6")
 
     MsgBox % "Apps Saved!"
 
@@ -218,12 +219,12 @@
     guiControlGet, folder4Var,, myEditFOLDER4
     guiControlGet, folder5Var,, myEditFOLDER5
     guiControlGet, folder6Var,, myEditFOLDER6
-    IniSaver(folder1Var, "Folders", "folder1")
-    IniSaver(folder2Var, "Folders", "folder2")
-    IniSaver(folder3Var, "Folders", "folder3")
-    IniSaver(folder4Var, "Folders", "folder4")
-    IniSaver(folder5Var, "Folders", "folder5")
-    IniSaver(folder6Var, "Folders", "folder6")
+    IniSaver(folder1Var, "Folders", "1")
+    IniSaver(folder2Var, "Folders", "2")
+    IniSaver(folder3Var, "Folders", "3")
+    IniSaver(folder4Var, "Folders", "4")
+    IniSaver(folder5Var, "Folders", "5")
+    IniSaver(folder6Var, "Folders", "6")
 
     MsgBox % "Folders Saved!"
 
