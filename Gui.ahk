@@ -15,39 +15,39 @@
     Return, %OUTPUT%
   }
 
+  ; --> Read in Settings from INI
+
+    HK1 := IniReader("Hotkeys", "hk1")
+    HK2 := IniReader("Hotkeys", "hk2")
+    HK3 := IniReader("Hotkeys", "hk3")
+    HK4 := IniReader("Hotkeys", "hk4")
+    HK5 := IniReader("Hotkeys", "hk5")
+    HK6 := IniReader("Hotkeys", "hk6")
+
+    BM1 := IniReader("Bookmarks", "bm1")
+    BM2 := IniReader("Bookmarks", "bm2")
+    BM3 := IniReader("Bookmarks", "bm3")
+    BM4 := IniReader("Bookmarks", "bm4")
+    BM5 := IniReader("Bookmarks", "bm5")
+    BM6 := IniReader("Bookmarks", "bm6")
+
+    APP1 := IniReader("Apps", "app1")
+    APP2 := IniReader("Apps", "app2")
+    APP3 := IniReader("Apps", "app3")
+    APP4 := IniReader("Apps", "app4")
+    APP5 := IniReader("Apps", "app5")
+    APP6 := IniReader("Apps", "app6")
+
+    FOLDER1 := IniReader("Folders", "folder1")
+    FOLDER2 := IniReader("Folders", "folder2")
+    FOLDER3 := IniReader("Folders", "folder3")
+    FOLDER4 := IniReader("Folders", "folder4")
+    FOLDER5 := IniReader("Folders", "folder5")
+    FOLDER6 := IniReader("Folders", "folder6")
+
+  ; --|
+
 ;--|
-
-; --> Read in Settings from INI
-
-  HK1 := IniReader("Hotkeys", "hk1")
-  HK2 := IniReader("Hotkeys", "hk2")
-  HK3 := IniReader("Hotkeys", "hk3")
-  HK4 := IniReader("Hotkeys", "hk4")
-  HK5 := IniReader("Hotkeys", "hk5")
-  HK6 := IniReader("Hotkeys", "hk6")
-
-  BM1 := IniReader("Bookmarks", "bm1")
-  BM2 := IniReader("Bookmarks", "bm2")
-  BM3 := IniReader("Bookmarks", "bm3")
-  BM4 := IniReader("Bookmarks", "bm4")
-  BM5 := IniReader("Bookmarks", "bm5")
-  BM6 := IniReader("Bookmarks", "bm6")
-
-  APP1 := IniReader("Apps", "app1")
-  APP2 := IniReader("Apps", "app2")
-  APP3 := IniReader("Apps", "app3")
-  APP4 := IniReader("Apps", "app4")
-  APP5 := IniReader("Apps", "app5")
-  APP6 := IniReader("Apps", "app6")
-
-  FOLDER1 := IniReader("Folders", "folder1")
-  FOLDER2 := IniReader("Folders", "folder2")
-  FOLDER3 := IniReader("Folders", "folder3")
-  FOLDER4 := IniReader("Folders", "folder4")
-  FOLDER5 := IniReader("Folders", "folder5")
-  FOLDER6 := IniReader("Folders", "folder6")
-
-; --|
 
 ; --> GUI
 
@@ -58,7 +58,7 @@
 
   Gui Add, StatusBar,, Status Bar
   Gui Add, Tab3, x416 y256 w0 h0, Tab 1|Tab 2
-  Gui Add, Tab3, x8 y8 w536 h538, Hotkeys|BookMarks|Apps|Folders
+  Gui Add, Tab3, x8 y8 w536 h350, Hotkeys|BookMarks|Apps|Folders
   Gui Tab, 1, 2
   Gui Add, Text, x32 y48 w33 h23 +0x200 Center, 1
   Gui Add, Text, x32 y80 w33 h23 +0x200 Center, 2
@@ -148,7 +148,7 @@
   GuiControl,, myEditFOLDER6, %FOLDER6%
 
 
-  Gui Show, w550 h576, Window
+  Gui Show, w550 h400, Window
   Return
 
   GuiEscape:

@@ -537,6 +537,22 @@
     Return
   ; --|
 
+  ;--> Settings
+    s_SettingsLauncher:
+      Run %A_AHKPath% "D:\Dev\AHK\MacroTool\Gui.ahk"
+    Return
+
+    l_SettingsLauncher:
+      Run %A_AHKPath% "D:\Dev\AHK\MacroTool\Gui.ahk"
+    Return
+
+    d_SettingsLauncher:
+      Run %A_AHKPath% "D:\Dev\AHK\MacroTool\Gui.ahk"
+    Return
+
+
+  ;--|
+
 ; --|
 
 ; -------------------------> Hotkeys
@@ -709,6 +725,30 @@
         KeyWait, %key%
     Return
   ; --|
+
+  ; Settings
+    CapsLock & c::
+
+      key=c
+      shortLabel=s_SettingsLauncher
+      longLabel=l_SettingsLauncher
+      doubleLabel=d_SettingsLauncher
+
+      KeyWait, %key%, T0.1
+
+        If (ErrorLevel) {
+          Gosub, %longLabel% ; Send long
+        }
+        Else {
+          KeyWait, %key%, D T0.1
+          if (ErrorLevel)
+            Gosub, %shortLabel% ; Send single
+          else
+            Gosub, %doubleLabel% ; Send double
+        }
+        KeyWait, %key%
+    Return
+  ;--|
 
 ; --|
 
