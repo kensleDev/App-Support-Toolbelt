@@ -171,34 +171,79 @@
   ; --|
 
   ; ---> Web
-    querySearch(title, type, url ) {
+    querySearch(title, type, url, newTab) {
 
       If (type = "input") {
-        InputBox, searchTerm , %title%, "Search", NOPE, Width, 100
-        SEARCH_URL = %url%%searchTerm%
+        openBookmark(url, "true", "input")
+        ; InputBox, searchTerm , %title%, "Search", NOPE, Width, 100
+        ; SEARCH_URL = %url%%searchTerm%
 
-        If (searchTerm != "") {
-          openURL(SEARCH_URL)
-          Return
-        }
+        ; If (searchTerm != "") {
+        ;   openURL(SEARCH_URL)
+        ;   Return
+        ; }
       }
 
       If (type = "clipboard") {
-        ClipBoard = %ClipBoard%
+        openBookmark(url, "true", "clipboard")
+        ; ClipBoard = %ClipBoard%
+        ; SEARCH_URL = %url%%ClipBoard%
 
-        SEARCH_URL = %url%%ClipBoard%
-        Run, %SEARCH_URL%
-        Sleep, 1000
-        WinMaximize, A
+        ; openBookmark(%SEARCH_URL%, %newTab%)
+
+        ; if (newTab = "true") {
+        ;   openBookmark(%SEARCH_URL%, "false")
+        ; } else {
+        ;   Run, %SEARCH_URL%
+        ;   Sleep, 1000
+        ;   WinMaximize, A
+        ; }
+
+
       }
 
+    }
+
+    openBookmark(url, newTab, input) {
+      if (input = "clipboard") {
+
+        ClipBoard = %ClipBoard%
+        SEARCH_URL = %url%%ClipBoard%
+
+        if (newTab = "true") {
+          Send, {Alt down}3{Alt up}
+          Click, 1835, 1000 Left, Down
+          Send, {Control down}l{Control up}
+          Send, {Control down}v{Control up}
+          Send, {Enter}
+        } else {
+          openURL(%SEARCH_URL%)
+        }
+
+      } else {
+        InputBox, searchTerm , %title%, "Search", NOPE, Width, 100
+        SEARCH_URL = %url%%searchTerm%
+
+        if (newTab = "true") {
+          SEARCH_URL = Clipboard
+          Send, {Alt down}3{Alt up}
+          Click, 1835, 1000 Left, Down
+          Send, {Control down}l{Control up}
+          Send, {Control down}v{Control up}
+          Send, {Enter}
+        } else {
+          If (searchTerm != "") {
+            openURL(SEARCH_URL)
+          Return
+        }
+
+      }
     }
 
     openURL(url) {
       Run, %url%
       Sleep, 1000
       WinMaximize, A
-      Return
     }
 
     serviceNowMouseMove() {
