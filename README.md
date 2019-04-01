@@ -12,6 +12,9 @@ It has 2 optional dependancies which are:
 - Lintalist - https://lintalist.github.io/ - This is an open source text/ snippet expander. Most IDE's and editing software have snippet management built in but the reason I use this one is it works everywhere. You can add variables/placeholders into the snippets or even build a multipule choice menus for re-useability. You can either search via the gui or assign an abbreviation to a snippet. It works really well for code snippets but a basic example could be: when you type "signoff" and press tab it could bring up a multipule choice of pre defined formal/ informal goodbyes. Not really that handy you get the point, a common one I use is pressing "@" then tab gives me a choice of emails to paste.
 
 ## General Info
+Requires auto hot key, make a shortcut to Macros.ahk and place in your startup folder (type shell:startup in windows explorer bar)
+
+## General Info
 
 - This script works by disabling the caps lock keys functionaily and using it as a modifer key.
 
