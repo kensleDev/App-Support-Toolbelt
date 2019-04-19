@@ -1,6 +1,8 @@
   FILENAME := "/Settings.ini"
   SETTINGS = %A_WorkingDir%%FILENAME%
 
+
+
   ; ---> General
 
     sendModComboDown(key) {
@@ -112,7 +114,7 @@
   ; --|
 
   ; ---> Programs
-    RunOrActivate(Target, WinTitle = "", Parameters = "") {
+    RunOrActivate(WinTitle = "", Target = "", Parameters = "") {
       ; Get the filename without a path
       SplitPath, Target, TargetNameOnly
       SetTitleMatchMode, 2
@@ -155,12 +157,12 @@
       Space := " "
       NL := "`n"
 
-      HK1 := assbleMenuItem(SETTING.HK1)
-      HK2 := assbleMenuItem(SETTING.HK2)
-      HK3 := assbleMenuItem(SETTING.HK3)
-      HK4 := assbleMenuItem(SETTING.HK4)
-      HK5 := assbleMenuItem(SETTING.HK5)
-      HK6 := assbleMenuItem(SETTING.HK6)
+      HK1 := assbleMenuItem(IniReader("Hotkeys", "1"))
+      HK2 := assbleMenuItem(IniReader("Hotkeys", "2"))
+      HK3 := assbleMenuItem(IniReader("Hotkeys", "3"))
+      HK4 := assbleMenuItem(IniReader("Hotkeys", "4"))
+      HK5 := assbleMenuItem(IniReader("Hotkeys", "5"))
+      HK6 := assbleMenuItem(IniReader("Hotkeys", "6"))
 
       THE_MENU := HK1 Space menu.1  NL HK2 Space menu.2 NL HK3 Space menu.3 NL HK4 Space menu.4 NL HK5 Space menu.5 NL HK6 Space menu.6
       Return, % THE_MENU

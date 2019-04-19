@@ -1,6 +1,8 @@
 
 ; -------------------------> Init
 
+  Menu, Tray, Icon, img/icon.png
+
   #Include, lib.ahk
 
   ; ---> READ IN SETTINGS
@@ -8,12 +10,12 @@
     SETTING := {}
     MENUS := {}
 
-    SETTING.HK1 := IniReader("Hotkeys", "1")
-    SETTING.HK2 := IniReader("Hotkeys", "2")
-    SETTING.HK3 := IniReader("Hotkeys", "3")
-    SETTING.HK4 := IniReader("Hotkeys", "4")
-    SETTING.HK5 := IniReader("Hotkeys", "5")
-    SETTING.HK6 := IniReader("Hotkeys", "6")
+    ; SETTING.HK1 := IniReader("Hotkeys", "1")
+    ; SETTING.HK2 := IniReader("Hotkeys", "2")
+    ; SETTING.HK3 := IniReader("Hotkeys", "3")
+    ; SETTING.HK4 := IniReader("Hotkeys", "4")
+    ; SETTING.HK5 := IniReader("Hotkeys", "5")
+    ; SETTING.HK6 := IniReader("Hotkeys", "6")
 
     SETTING.BM1 := IniReader("Bookmarks", "1")
     SETTING.BM2 := IniReader("Bookmarks", "2")
@@ -22,12 +24,12 @@
     SETTING.BM5 := IniReader("Bookmarks", "5")
     SETTING.BM6 := IniReader("Bookmarks", "6")
 
-    SETTING.APP1 := IniReader("App", "1")
-    SETTING.APP2 := IniReader("App", "2")
-    SETTING.APP3 := IniReader("App", "3")
-    SETTING.APP4 := IniReader("App", "4")
-    SETTING.APP5 := IniReader("App", "5")
-    SETTING.APP6 := IniReader("App", "6")
+    ; SETTING.APP1 := IniReader("App", "1")
+    ; SETTING.APP2 := IniReader("App", "2")
+    ; SETTING.APP3 := IniReader("App", "3")
+    ; SETTING.APP4 := IniReader("App", "4")
+    ; SETTING.APP5 := IniReader("App", "5")
+    ; SETTING.APP6 := IniReader("App", "6")
 
     SETTING.FOLDER1 := IniReader("Folder", "1")
     SETTING.FOLDER2 := IniReader("Folder", "2")
@@ -45,14 +47,14 @@
 
     MENUS.BM := assembleMenu([MENUS.BM_1, MENUS.BM_2, MENUS.BM_3, MENUS.BM_4, MENUS.BM_5, MENUS.BM_6])
 
-    MENUS.APP_1 := IniReader("APPMenu", "1")
-    MENUS.APP_2 := IniReader("APPMenu", "2")
-    MENUS.APP_3 := IniReader("APPMenu", "3")
-    MENUS.APP_4 := IniReader("APPMenu", "4")
-    MENUS.APP_5 := IniReader("APPMenu", "5")
-    MENUS.APP_6 := IniReader("APPMenu", "6")
+    ; MENUS.APP_1 := IniReader("APPMenu", "1")
+    ; MENUS.APP_2 := IniReader("APPMenu", "2")
+    ; MENUS.APP_3 := IniReader("APPMenu", "3")
+    ; MENUS.APP_4 := IniReader("APPMenu", "4")
+    ; MENUS.APP_5 := IniReader("APPMenu", "5")
+    ; MENUS.APP_6 := IniReader("APPMenu", "6")
 
-    MENUS.APP := assembleMenu([MENUS.APP_1, MENUS.APP_2, MENUS.APP_3, MENUS.APP_4, MENUS.APP_5, MENUS.APP_6])
+    ; MENUS.APP := assembleMenu([MENUS.APP_1, MENUS.APP_2, MENUS.APP_3, MENUS.APP_4, MENUS.APP_5, MENUS.APP_6])
 
     MENUS.FOLDER_1 := IniReader("FOLDERMenu", "1")
     MENUS.FOLDER_2 := IniReader("FOLDERMenu", "2")
@@ -115,6 +117,14 @@
     Return
   ; --|
 
+  ; Reload Script
+    ^!+r:: ; press control+r to reload
+      Msgbox, Reload Windows Helper?
+      ifMsgBox, Yes
+        Reload
+    return
+  ; --|
+
 ; --|
 
 ; -------------------------> Banks
@@ -128,7 +138,7 @@
   #Include, banks/bookmarks.ahk
 
   ;--> GUI
-    GUI_FILE := "\Gui.ahk"
+    GUI_FILE := "\gui\Gui.ahk"
 
     s_SettingsLauncher:
       Run %A_AHKPath% "D:\Dev\AHK\MacroTool\Gui.ahk"
