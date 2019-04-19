@@ -68,9 +68,9 @@
   ; Keyboard Detection
     FileReadLine, keyboardType, C:\Dev\os.txt, 1
     If (%keyboardType% = mac)
-      Alt::LWin
-      LWin::Alt
-      RWin::Alt
+      ; Alt::LWin
+      ; LWin::Alt
+      ; RWin::Alt
 
       ; --> Media Buttons
 
@@ -146,6 +146,13 @@
   ;--|
 
 ; --|
+
+; -------------------------> Vendor
+
+  #Include, vendor/virtualDesktops.ahk
+
+; --|
+
 
 ; -------------------------> Hotkeys
 
