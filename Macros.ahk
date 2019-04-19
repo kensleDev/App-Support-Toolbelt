@@ -150,7 +150,6 @@
       Return, %OUTPUT%
     }
 
-
     ; Empty trash
       #Del::FileRecycleEmpty ; win + del
       return
@@ -171,7 +170,7 @@
   ; --|
 
   ; ---> Web
-    querySearch(title, type, url, newTab) {
+    querySearch(title, type, url) {
 
       If (type = "input") {
         openBookmark(url, "true", "input")
@@ -210,34 +209,20 @@
         ClipBoard = %ClipBoard%
         SEARCH_URL = %url%%ClipBoard%
 
-        if (newTab = "true") {
-          Send, {Alt down}3{Alt up}
-          Click, 1835, 1000 Left, Down
-          Send, {Control down}l{Control up}
-          Send, {Control down}v{Control up}
-          Send, {Enter}
-        } else {
-          openURL(%SEARCH_URL%)
+        If (searchTerm != "") {
+          openURL(SEARCH_URL)
         }
 
       } else {
         InputBox, searchTerm , %title%, "Search", NOPE, Width, 100
         SEARCH_URL = %url%%searchTerm%
 
-        if (newTab = "true") {
-          SEARCH_URL = Clipboard
-          Send, {Alt down}3{Alt up}
-          Click, 1835, 1000 Left, Down
-          Send, {Control down}l{Control up}
-          Send, {Control down}v{Control up}
-          Send, {Enter}
-        } else {
-          If (searchTerm != "") {
-            openURL(SEARCH_URL)
-          Return
+        If (searchTerm != "") {
+          openURL(SEARCH_URL)
         }
 
       }
+
     }
 
     openURL(url) {
