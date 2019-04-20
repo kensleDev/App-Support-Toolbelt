@@ -88,6 +88,7 @@
         F13::Send {Media_Play_Pause}
         return
 
+
       ; --|
     ; Else
       ; --> Media Buttons
@@ -137,6 +138,9 @@
 
   #Include, banks/bookmarks.ahk
 
+  #Include, banks/utils.ahk
+
+
   ;--> GUI
     GUI_FILE := "\gui\Gui.ahk"
 
@@ -159,36 +163,14 @@
 
 ; -------------------------> Vendor
 
-  #Include, vendor/virtualDesktops.ahk
+  ; #Include, vendor/virtualDesktops.ahk
+
+  ; Run, vendor/vde/vde.ahk
 
 ; --|
 
 
 ; -------------------------> Hotkeys
-
-  ; Service Now
-    CapsLock & q::
-
-      key=q
-      shortLabel=s_ServiceNow
-      longLabel=l_ServiceNow
-      doubleLabel=d_ServiceNow
-
-      KeyWait, %key%, T0.1
-
-        If (ErrorLevel) {
-          Gosub, %longLabel% ; Send long
-        }
-        Else {
-          KeyWait, %key%, D T0.1
-          if (ErrorLevel)
-            Gosub, %shortLabel% ; Send single
-          else
-            Gosub, %doubleLabel% ; Send double
-        }
-        KeyWait, %key%
-    Return
-  ; --|
 
   ; Search
     CapsLock & s::
@@ -289,51 +271,6 @@
     Return
   ; --|
 
-  ; Launch Utils
-    CapsLock & x::
-
-      key=x
-      shortLabel=UtilLauncherClipX
-      longLabel=UtilLauncherClipX
-      doubleLabel=UtilLauncherClipX
-
-      KeyWait, %key%, T0.1
-
-        If (ErrorLevel) {
-          Gosub, %longLabel% ; Send long
-        }
-        Else {
-          KeyWait, %key%, D T0.1
-          if (ErrorLevel)
-            Gosub, %shortLabel% ; Send single
-          else
-            Gosub, %doubleLabel% ; Send double
-        }
-        KeyWait, %key%
-    Return
-
-    CapsLock & z::
-
-      key=z
-      shortLabel=UtilLauncherLintalist
-      longLabel=UtilLauncherLintalist
-      doubleLabel=UtilLauncherLintalist
-
-      KeyWait, %key%, T0.1
-
-        If (ErrorLevel) {
-          Gosub, %longLabel% ; Send long
-        }
-        Else {
-          KeyWait, %key%, D T0.1
-          if (ErrorLevel)
-            Gosub, %shortLabel% ; Send single
-          else
-            Gosub, %doubleLabel% ; Send double
-        }
-        KeyWait, %key%
-    Return
-  ; --|
 
   ; Settings
     CapsLock & c::
@@ -359,5 +296,53 @@
     Return
   ;--|
 
+  CapsLock & h::Left
+  CapsLock & j::Down
+  CapsLock & k::Up
+  CapsLock & l::Right
+
+  CapsLock & n::openWindowsNotification()
+
+  CapsLock & 1::#1
+  CapsLock & 2::#2
+  CapsLock & 3::#3
+  CapsLock & 4::#4
+  CapsLock & 5::#5
+
+  PgDn::
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+    send, {Down}
+  return
+
+  PgUp::
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+    send, {Up}
+  return
+
+  CapsLock & PgDn::PgDn
+  CapsLock & PgUp::PgUp
+
 ; --|
+
+
 
