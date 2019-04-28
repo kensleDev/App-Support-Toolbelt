@@ -126,6 +126,11 @@
     return
   ; --|
 
+
+  ; esacape
+    +space::send, {Escape}
+  ; --|
+
 ; --|
 
 ; -------------------------> Banks
@@ -302,6 +307,8 @@
   CapsLock & l::Right
 
   CapsLock & n::openWindowsNotification()
+
+  Capslock & q::send, !{Space}
 
   CapsLock & 1::#1
   CapsLock & 2::#2
