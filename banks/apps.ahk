@@ -5,7 +5,9 @@ appBank() {
   APP_2_NAME=Chrome
   APP_3_NAME=Franz
 
-  THE_MENU := assembleMenu([APP_1_NAME, APP_2_NAME, APP_3_NAME])
+  APP_6_NAME=Postman
+
+  THE_MENU := assembleMenu([APP_1_NAME, APP_2_NAME, APP_3_NAME, DUMMY, DUMMY, APP_6_NAME])
 
   ToolTip % THE_MENU
 
@@ -21,8 +23,8 @@ appBank() {
     ;   RunOrActivate()
     ; Else If Key=x
     ;   RunOrActivate()
-    ; Else If Key=c
-    ;   RunOrActivate()
+    Else If Key=c
+      RunOrActivate(APP_6_NAME)
   Return
 }
 
