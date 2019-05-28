@@ -57,6 +57,23 @@
   |   |  |  |
 
 
+## The Magic
+
+This is what makes caps a modifier, for your own scripts
+
+```
+  #Persistent
+  SetCapsLockState, AlwaysOff
+  ; Caps Lock Disable
+  capslock::return
+  ; Caps Lock with shift+caps
+  +Capslock::
+    If GetKeyState("CapsLock", "T") = 1
+        SetCapsLockState, AlwaysOff
+    Else
+        SetCapsLockState, AlwaysOn
+  Return
+```
 
 # Todo
 

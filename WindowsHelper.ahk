@@ -56,7 +56,7 @@
     CapsLock & k::Up
     CapsLock & l::Right
 
-    Capslock & q::send, !{Space}
+    Capslock & q::send, ^#k
     CapsLock & n::openWindowsNotification()
 
     PgDn::
