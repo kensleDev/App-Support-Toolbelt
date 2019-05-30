@@ -92,7 +92,12 @@
     CapsLock & PgDn::PgDn
     CapsLock & PgUp::PgUp
 
-    CapsLock & c::#!c
+    CapsLock & c::
+      x := (A_ScreenWidth // 2 - 200)
+      y := (A_ScreenHeight // 2 - 200)
+      mousemove, x, y
+      Send, #!c
+    Return
   ;--|
 
   ; Search Menu
