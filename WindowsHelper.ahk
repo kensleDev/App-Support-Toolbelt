@@ -70,7 +70,8 @@
 
 
     CapsLock & b:: layoutWindows(1, true)
-    CapsLock & g:: changeFifthsModeValue(1, 2)
+
+    CapsLock & g:: fifthsMenu(1)
 
 
   ; --|

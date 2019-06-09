@@ -324,6 +324,7 @@
   ; ---> Window Layout
 
 
+
     writeMonitorWidths() {
       SysGet, mCount, MonitorCount
 
@@ -340,9 +341,123 @@
       }
     }
 
-    selectMode(mode, modeValue) {
-      IniWrite, %mode%, %A_WorkingDir%/Settings.ini, layout, mode
-      IniWrite, %modeValue%, %A_WorkingDir%/Settings.ini, layout, modeValue
+    layoutMenu(monitor) {
+      THE_MENU=--Layout Modes--`n(a)-Fifths
+      ToolTip, %THE_MENU%
+
+      Input Key, L1
+        ToolTip
+        If Key=a
+          fifthsMenu(monitor)
+      Return
+    }
+
+    monitorMenu() {
+      THE_MENU=--Monitor--`n(a)-1`n(s)-2
+      ToolTip, %THE_MENU%
+
+      Input Key, L1
+        ToolTip
+        If Key=a
+          fifthsMenu(1)
+        Else If Key=a
+          fifthsMenu(2)
+      Return
+    }
+
+    moveIntoPosition(monitor) {
+
+      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
+
+      if (currentMode == "fifths") {
+
+        IniRead, Height, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
+
+        IniRead, App1Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName1
+        IniRead, Win1Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
+        IniRead, Win1X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
+
+        IniRead, App2Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName2
+        IniRead, Win2Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2Width
+        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
+
+        ; MsgBox, %App1Name%
+        ; MsgBox, %App1Name%, %Win1Width%, %Win1X%
+
+        ; MsgBox, %App2Name%, %Win2Width%, %Win2X%
+
+
+
+        WinMove, ahk_exe %App1Name%, , %Win1X%, 0, %Win1Width%, %Height%
+        WinMove, ahk_exe %App2Name%, , %Win2X%, 0, %Win2Width%, %Height%
+      }
+
+    }
+
+    layoutWindows(monitor, prompt) {
+
+      writeMonitorWidths()
+
+      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
+      IniRead, currentModeValue, %A_WorkingDir%/Settings.ini, layout, modeValue
+
+      IniRead, MonitorWidth, %A_WorkingDir%/Settings.ini, monitor%monitor%, Width
+      IniRead, MonitorHeight, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
+
+      if (currentMode == "fifths") {
+        WindowCount := 2
+
+        Loop %WindowCount% {
+          WinWidth := calcFifthWidth(MonitorWidth, currentModeValue, A_Index)
+          IniWrite, %WinWidth%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window%A_Index%Width
+
+          if (prompt == true) {
+            MsgBox, Click on window %A_Index%
+            KeyWait, LButton, D
+            WinGet, WinProcess, ProcessName, A
+            IniWrite, %WinProcess%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName%A_Index%
+          }
+
+        }
+
+        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
+
+        IniWrite, 0,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
+        IniWrite, %Win2X%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
+
+        moveIntoPosition(monitor)
+
+      } else {
+        MsgBox, Errors
+      }
+
+    }
+
+    ; fifths mode
+
+    fifthsMenu(monitor) {
+      THE_MENU=--Input--`n(a)-20-80`n(s)-40-60`n(d)-60-40`n(f)-80-20
+      ToolTip, %THE_MENU%
+
+      Input Key, L1
+        ToolTip
+        If Key=a
+          changeFifthsModeValue(monitor, 1)
+        Else If Key=s
+          changeFifthsModeValue(monitor, 2)
+        Else If Key=d
+          changeFifthsModeValue(monitor, 3)
+        Else If Key=f
+          changeFifthsModeValue(monitor, 4)
+      Return
+    }
+
+    changeFifthsModeValue(monitor, newModeValue) {
+
+      IniWrite, %newModeValue%, %A_WorkingDir%/Settings.ini, layout, modeValue
+
+      layoutWindows(monitor, false)
+
     }
 
     calcFifthWidth(MonitorWidth, modeValue, window) {
@@ -396,81 +511,6 @@
 
     }
 
-    layoutWindows(monitor, prompt) {
-
-      writeMonitorWidths()
-
-      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
-      IniRead, currentModeValue, %A_WorkingDir%/Settings.ini, layout, modeValue
-
-      IniRead, MonitorWidth, %A_WorkingDir%/Settings.ini, monitor%monitor%, Width
-      IniRead, MonitorHeight, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
-
-      if (currentMode == "fifths") {
-        WindowCount := 2
-
-        Loop %WindowCount% {
-          WinWidth := calcFifthWidth(MonitorWidth, currentModeValue, A_Index)
-          IniWrite, %WinWidth%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window%A_Index%Width
-
-          if (prompt == true) {
-            MsgBox, Click on window %A_Index%
-            KeyWait, LButton, D
-            WinGet, WinProcess, ProcessName, A
-            IniWrite, %WinProcess%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName%A_Index%
-          }
-
-        }
-
-        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
-
-        IniWrite, 0,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
-        IniWrite, %Win2X%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
-
-        moveIntoPosition(monitor)
-
-      } else {
-        MsgBox, Errors
-      }
-
-    }
-
-    changeFifthsModeValue(monitor, newModeValue) {
-
-      IniWrite, %newModeValue%, %A_WorkingDir%/Settings.ini, layout, modeValue
-
-      layoutWindows(monitor, false)
-
-    }
-
-    moveIntoPosition(monitor) {
-
-      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
-
-      if (currentMode == "fifths") {
-
-        IniRead, Height, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
-
-        IniRead, App1Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName1
-        IniRead, Win1Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
-        IniRead, Win1X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
-
-        IniRead, App2Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName2
-        IniRead, Win2Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2Width
-        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
-
-        ; MsgBox, %App1Name%
-        MsgBox, %App1Name%, %Win1Width%, %Win1X%
-
-        MsgBox, %App2Name%, %Win2Width%, %Win2X%
-
-
-
-        WinMove, ahk_exe %App1Name%, , %Win1X%, 0, %Win1Width%, %Height%
-        WinMove, ahk_exe %App2Name%, , %Win2X%, 0, %Win2Width%, %Height%
-      }
-
-    }
 
 
 
