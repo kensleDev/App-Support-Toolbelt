@@ -1,8 +1,6 @@
   FILENAME := "/Settings.ini"
   SETTINGS = %A_WorkingDir%%FILENAME%
 
-
-
   ; ---> General
 
     sendModComboDown(key) {
@@ -174,5 +172,306 @@
 
       Return, O item C
     }
+
+  ; --|
+
+  ; ---> Virtual Desktops - CREDIT NEEDED
+
+    ; Globals
+    DesktopCount = 2 ; Windows starts with 2 desktops at boot
+    CurrentDesktop = 1 ; Desktop count is 1-indexed (Microsoft numbers them this way)
+    ;
+    ; This function examines the registry to build an accurate list of the current virtual desktops and which one we're currently on.
+    ; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\1\VirtualDesktops
+    ; List of desktops appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops
+    ;
+    mapDesktopsFromRegistry() {
+      global CurrentDesktop, DesktopCount
+      ; Get the current desktop UUID. Length should be 32 always, but there's no guarantee this couldn't change in a later Windows release so we check.
+      IdLength := 32
+      SessionId := getSessionId()
+      if (SessionId) {
+        RegRead, CurrentDesktopId, HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\%SessionId%\VirtualDesktops, CurrentVirtualDesktop
+        if (CurrentDesktopId) {
+          IdLength := StrLen(CurrentDesktopId)
+        }
+      }
+      ; Get a list of the UUIDs for all virtual desktops on the system
+      RegRead, DesktopList, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
+      if (DesktopList) {
+        DesktopListLength := StrLen(DesktopList)
+        ; Figure out how many virtual desktops there are
+        DesktopCount := DesktopListLength / IdLength
+      } else {
+        DesktopCount := 1
+      }
+      ; Parse the REG_DATA string that stores the array of UUID's for virtual desktops in the registry.
+      i := 0
+      while (CurrentDesktopId and i < DesktopCount) {
+        StartPos := (i * IdLength) + 1
+        DesktopIter := SubStr(DesktopList, StartPos, IdLength)
+        OutputDebug, The iterator is pointing at %DesktopIter% and count is %i%.
+        ; Break out if we find a match in the list. If we didn't find anything, keep the
+        ; old guess and pray we're still correct :-D.
+        if (DesktopIter = CurrentDesktopId) {
+          CurrentDesktop := i + 1
+          OutputDebug, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter%.
+          break
+        }
+        i++
+      }
+    }
+
+    getSessionId() {
+      ProcessId := DllCall("GetCurrentProcessId", "UInt")
+      if ErrorLevel {
+        OutputDebug, Error getting current process id: %ErrorLevel%
+        return
+      }
+      OutputDebug, Current Process Id: %ProcessId%
+      DllCall("ProcessIdToSessionId", "UInt", ProcessId, "UInt*", SessionId)
+      if ErrorLevel {
+        OutputDebug, Error getting session id: %ErrorLevel%
+        return
+      }
+      OutputDebug, Current Session Id: %SessionId%
+      return SessionId
+    }
+
+    switchDesktopByNumber(targetDesktop) {
+      global CurrentDesktop, DesktopCount
+      ; Re-generate the list of desktops and where we fit in that. We do this because
+      ; the user may have switched desktops via some other means than the script.
+      mapDesktopsFromRegistry()
+      ; Don't attempt to switch to an invalid desktop
+      if (targetDesktop > DesktopCount || targetDesktop < 1) {
+        OutputDebug, [invalid] target: %targetDesktop% current: %CurrentDesktop%
+        return
+      }
+      ; Go right until we reach the desktop we want
+      while(CurrentDesktop < targetDesktop) {
+        Send ^#{Right}
+        CurrentDesktop++
+        OutputDebug, [right] target: %targetDesktop% current: %CurrentDesktop%
+      }
+      ; Go left until we reach the desktop we want
+      while(CurrentDesktop > targetDesktop) {
+        Send ^#{Left}
+        CurrentDesktop--
+        OutputDebug, [left] target: %targetDesktop% current: %CurrentDesktop%
+      }
+    }
+
+    createVirtualDesktop() {
+      global CurrentDesktop, DesktopCount
+      Send, #^d
+      DesktopCount++
+      CurrentDesktop = %DesktopCount%
+      OutputDebug, [create] desktops: %DesktopCount% current: %CurrentDesktop%
+    }
+
+    deleteVirtualDesktop() {
+      global CurrentDesktop, DesktopCount
+      Send, #^{F4}
+      DesktopCount--
+      CurrentDesktop--
+      OutputDebug, [delete] desktops: %DesktopCount% current: %CurrentDesktop%
+    }
+
+
+
+    ; Main
+    SetKeyDelay, 75
+    mapDesktopsFromRegistry()
+    OutputDebug, [loading] desktops: %DesktopCount% current: %CurrentDesktop%
+  ; --|
+
+  ; ---> Navigation
+
+    smoothPager(direction) {
+      if(direction == "Up") {
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+        send, {Up}
+      } else {
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+        send, {Down}
+      }
+    }
+
+
+  ; --|
+
+  ; ---> Window Layout
+
+
+    writeMonitorWidths() {
+      SysGet, mCount, MonitorCount
+
+
+      Loop %mCount% {
+        SysGet, BoundingCoordinates1, MonitorWorkArea, %A_Index%
+        MonitorWidth := BoundingCoordinates1Right - BoundingCoordinates1Left
+        MonitorHeight := BoundingCoordinates1Bottom - BoundingCoordinates1Top
+
+        IniWrite, %MonitorWidth%,  %A_WorkingDir%/Settings.ini, monitor%A_Index%, Width
+        IniWrite, %MonitorHeight%,  %A_WorkingDir%/Settings.ini, monitor%A_Index%, Height
+
+        IniWrite, %mCount%,  %A_WorkingDir%/Settings.ini, layout, MonitorCount
+      }
+    }
+
+    selectMode(mode, modeValue) {
+      IniWrite, %mode%, %A_WorkingDir%/Settings.ini, layout, mode
+      IniWrite, %modeValue%, %A_WorkingDir%/Settings.ini, layout, modeValue
+    }
+
+    calcFifthWidth(MonitorWidth, modeValue, window) {
+
+      Width := 0
+
+      if (window == 1) {
+
+        if (modeValue == 1) {
+          Width := MonitorWidth / 5
+        }
+
+        if (modeValue == 2) {
+          Width := MonitorWidth / 5 * 2
+        }
+
+        if (modeValue == 3) {
+          Width := MonitorWidth / 5 * 3
+        }
+
+        if (modeValue == 4) {
+          Width := MonitorWidth / 5 * 4
+        }
+
+      }
+
+      if (window == 2) {
+
+        if (modeValue == 1) {
+          Width := MonitorWidth / 5 * 4
+        }
+
+        if (modeValue == 2) {
+          Width := MonitorWidth / 5 * 3
+        }
+
+        if (modeValue == 3) {
+          Width := MonitorWidth / 5 * 2
+        }
+
+        if (modeValue == 4) {
+          Width := MonitorWidth / 5 * 1
+        }
+
+      }
+
+      return Width
+
+      ; Width := Width
+      ; Win2Width := win2Width
+
+    }
+
+    layoutWindows(monitor, prompt) {
+
+      writeMonitorWidths()
+
+      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
+      IniRead, currentModeValue, %A_WorkingDir%/Settings.ini, layout, modeValue
+
+      IniRead, MonitorWidth, %A_WorkingDir%/Settings.ini, monitor%monitor%, Width
+      IniRead, MonitorHeight, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
+
+      if (currentMode == "fifths") {
+        WindowCount := 2
+
+        Loop %WindowCount% {
+          WinWidth := calcFifthWidth(MonitorWidth, currentModeValue, A_Index)
+          IniWrite, %WinWidth%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window%A_Index%Width
+
+          if (prompt == true) {
+            MsgBox, Click on window %A_Index%
+            KeyWait, LButton, D
+            WinGet, WinProcess, ProcessName, A
+            IniWrite, %WinProcess%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName%A_Index%
+          }
+
+        }
+
+        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
+
+        IniWrite, 0,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
+        IniWrite, %Win2X%,  %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
+
+        moveIntoPosition(monitor)
+
+      } else {
+        MsgBox, Errors
+      }
+
+    }
+
+    changeFifthsModeValue(monitor, newModeValue) {
+
+      IniWrite, %newModeValue%, %A_WorkingDir%/Settings.ini, layout, modeValue
+
+      layoutWindows(monitor, false)
+
+    }
+
+    moveIntoPosition(monitor) {
+
+      IniRead, currentMode, %A_WorkingDir%/Settings.ini, layout, mode
+
+      if (currentMode == "fifths") {
+
+        IniRead, Height, %A_WorkingDir%/Settings.ini, monitor%monitor%, Height
+
+        IniRead, App1Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName1
+        IniRead, Win1Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1Width
+        IniRead, Win1X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window1X
+
+        IniRead, App2Name, %A_WorkingDir%/Settings.ini, monitor%monitor%, AppName2
+        IniRead, Win2Width, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2Width
+        IniRead, Win2X, %A_WorkingDir%/Settings.ini, monitor%monitor%, Window2X
+
+        ; MsgBox, %App1Name%
+        MsgBox, %App1Name%, %Win1Width%, %Win1X%
+
+        MsgBox, %App2Name%, %Win2Width%, %Win2X%
+
+
+
+        WinMove, ahk_exe %App1Name%, , %Win1X%, 0, %Win1Width%, %Height%
+        WinMove, ahk_exe %App2Name%, , %Win2X%, 0, %Win2Width%, %Height%
+      }
+
+    }
+
+
 
   ; --|
