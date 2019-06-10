@@ -323,8 +323,6 @@
 
   ; ---> Window Layout
 
-
-
     writeMonitorWidths() {
       SysGet, mCount, MonitorCount
 

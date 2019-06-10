@@ -19,7 +19,6 @@
     Return
   ; --|
 
-
 ; --|
 
 ; -------------------------> Banks
@@ -52,6 +51,9 @@
     CapsLock & j::Down
     CapsLock & k::Up
     CapsLock & l::Right
+
+    Capslock & o::Home
+    CapsLock & p::End
 
     ; Smooth Page up and down
     CapsLock & x::smoothPager("Up")
