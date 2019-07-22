@@ -1,4 +1,5 @@
 
+
 ; -------------------------> Init
 
   Menu, Tray, Icon, img/icon.png
@@ -56,8 +57,8 @@
     CapsLock & p::End
 
     ; Smooth Page up and down
-    CapsLock & x::smoothPager("Up")
-    CapsLock & z::smoothPager("Down")
+    CapsLock & x::smoothPager("Down")
+    CapsLock & z::smoothPager("Up")
 
     CapsLock & 1::switchDesktopByNumber(1)
     CapsLock & 2::switchDesktopByNumber(2)
@@ -70,9 +71,7 @@
     ;^!c::createVirtualDesktop()
     ;^!d::deleteVirtualDesktop()
 
-
     CapsLock & b:: layoutWindows(1, true)
-
     CapsLock & g:: fifthsMenu(1)
 
 
@@ -166,4 +165,11 @@
 
 ;--\
 
+#IfWinActive ahk_class CabinetWClass ; Windows Explorer
+    #Space::
+        ControlFocus, DirectUIHWND3, A
+        SendInput, {Space}
+        return
+#IfWinActive
 
+Capslock & t::send, ^{Space}
