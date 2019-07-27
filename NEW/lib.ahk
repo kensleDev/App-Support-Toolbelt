@@ -65,6 +65,30 @@
       KeyWait, %key%
   }
 
+  showHotkeyMenu() {
+    tooltip caps is pressed
+  }
+
+  hideHotkeyMenu() {
+    tooltip
+  }
+
+  taskbarApp(number) {
+    Send, #%number%
+  }
+
+  sendKey(keyName) {
+    if (keyName=backslash) {
+      Send, \
+    } else if (keyName=backtick) {
+      Send, ``
+    } else if (keyName=pipe) {
+      Send, |
+    } else {
+
+    }
+  }
+
   ; --|
 
 ; ---> SHARED

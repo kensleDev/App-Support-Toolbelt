@@ -40,6 +40,8 @@ Menu, Tray, Icon, img/icon.png
   ;---|
 
   ; Menus
+    CapsLock & Tab:: showHotkeyMenu()
+    CapsLock & Tab up:: hideHotkeyMenu()
     CapsLock & f::searchMenu()
   ;
 
@@ -48,19 +50,19 @@ Menu, Tray, Icon, img/icon.png
     CapsLock & c:: openDitto()
 
     ; Rearrange taskbar apps
-    CapsLock & q::Send, #1
-    CapsLock & w::Send, #2
-    CapsLock & e::Send, #3
-    CapsLock & r::Send, #4
-    CapsLock & t::Send, #5
+    CapsLock & q::taskbarApp(1)
+    CapsLock & w::taskbarApp(2)
+    CapsLock & e::taskbarApp(3)
+    CapsLock & r::taskbarApp(4)
+    CapsLock & t::taskbarApp(5)
 
   ;---|
 
   ; Remaps
 
-    CapsLock & /::Send, \
-    CapsLock & `;::Send, ``
-    CapsLock & '::Send, |
+    CapsLock & /::sendKey(backslash)
+    CapsLock & `;::sendKey(backtick)
+    CapsLock & '::sendKey(pipe)
 
   ;---|
 
@@ -70,3 +72,7 @@ Menu, Tray, Icon, img/icon.png
 
 
 ; --|
+
+
+
+
