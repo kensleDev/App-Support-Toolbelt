@@ -39,6 +39,10 @@ Menu, Tray, Icon, img/icon.png
 
   ;---|
 
+  ; Menus
+    CapsLock & f::searchMenu()
+  ;
+
   ; Apps
 
     CapsLock & c:: openDitto()
@@ -62,3 +66,7 @@ Menu, Tray, Icon, img/icon.png
 
 ; -<>-|
 
+
+
+
+; --|

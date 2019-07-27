@@ -14,6 +14,11 @@
 | Capslock & i | smoothPager("Down") |
 | CapsLock & o | End |
 
+## Menus
+| Key | Command |
+| :-------- | :--------: |
+| CapsLock & f | searchMenu() |
+
 ## Apps
 | Key | Command |
 | :-------- | :--------: |
