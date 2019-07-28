@@ -78,16 +78,15 @@
   }
 
   sendKey(keyName) {
-    if (keyName=backslash) {
+    if (keyName="backslash") {
       Send, \
-    } else if (keyName=backtick) {
+    } else if (keyName="backtick") {
       Send, ``
-    } else if (keyName=pipe) {
+    } else if (keyName="pipe") {
       Send, |
-    } else {
-
     }
   }
+
 
   ; --|
 
