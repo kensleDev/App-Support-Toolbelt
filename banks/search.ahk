@@ -1,3 +1,28 @@
+
+activateSearchMenu() {
+  key=s
+  shortLabel=s_Search
+  longLabel=l_Search
+  doubleLabel=d_Search
+
+  KeyWait, %key%, T0.1
+
+    If (ErrorLevel) {
+      Gosub, %longLabel% ; Send long
+      ; MsgBox, longg
+    }
+    Else {
+      KeyWait, %key%, D T0.1
+      if (ErrorLevel)
+        Gosub, %shortLabel% ; Send single
+        ; MsgBox, Single
+      else
+        Gosub, %doubleLabel% ; Send double
+        ; MsgBox, double
+    }
+    KeyWait, %key%
+}
+
 searchInputBank() {
   THE_MENU=--Input--`n(a)-Google`n(s)-StackOverFlow`n(d)-Twitter`n(z)-Youtube`n(x)-Reddit`n
   ToolTip, %THE_MENU%

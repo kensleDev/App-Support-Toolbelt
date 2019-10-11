@@ -14,7 +14,7 @@ Menu, Tray, Icon, img/icon.png
     If GetKeyState("CapsLock", "T") = 1
         SetCapsLockState, AlwaysOff
     Else
-        SetCapsLockState, AlwaysOng
+        SetCapsLockState, AlwaysOn
   Return
 ; --|
 
