@@ -43,7 +43,8 @@
   ; Navigation
 
   ; Need Work
-  Capslock & q::send, ^#k
+  capslock & w::moveToFileExplorerSpot()
+  Capslock & Tab::Click
   CapsLock & n::openWindowsNotification()
 
   ; General
@@ -101,13 +102,35 @@
 ;--\
 
 
+moveMouseForWindowSwap() {
 
+  WinGet, Program, ProcessName, A
+  SplitPath, Program,,,, OutNameNoExt
+  StringLower, CleanProgramName, OutNameNoExt
+
+  if (CleanProgramName = "explorer") {
+    moveToFileExplorerSpot()
+  } else if (CleanProgramName = "chrome") {
+    moveToFileExplorerSpot()
+  } else if (CleanProgramName = "code") {
+    moveToFileExplorerSpot()
+  } else {
+    MouseMove, 0, 0
+  }
+
+}
+
+moveToFileExplorerSpot() {
+  MoveMouseX = 250
+  MoveMouseY = 140
+  MouseMove, %MoveMouseX%, %MoveMouseY%
+}
 
 ; #IfWinActive ahk_class CabinetWClass ; Windows Explorer
-;     #Space::
-;         ControlFocus, DirectUIHWND3, A
-;         SendInput, {Space}
-;         return
+;   #Space::
+;       ControlFocus, DirectUIHWND3, A
+;       SendInput, {Space}
+;       return
 ; #IfWinActive
 
 ; Capslock & t::send, ^{Space}
@@ -118,4 +141,3 @@
 ;^!d::deleteVirtualDesktop()
 ; CapsLock & b:: layoutWindows(1, true)
 ; CapsLock & g:: fifthsMenu(1)
-
