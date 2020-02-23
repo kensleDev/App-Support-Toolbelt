@@ -10,8 +10,10 @@
     #Persistent
     SetCapsLockState, AlwaysOff
     ; Caps Lock Disable
-    capslock::return
+    capslock::Escape
     ; Caps Lock with shift+caps
+
+
     +Capslock::
       If GetKeyState("CapsLock", "T") = 1
           SetCapsLockState, AlwaysOff
@@ -26,9 +28,9 @@
 
   #Include, banks/search.ahk
 
-  #Include, banks/apps.ahk
+  ; #Include, banks/apps.ahk
 
-  #Include, banks/utils.ahk
+  ; #Include, banks/utils.ahk
 
   ; #Include, banks/folders.ahk
 
@@ -40,15 +42,18 @@
 
 ; -------------------------> Hotkeys
 
-  ; Navigation
-
-  ; Need Work
-  capslock & w::moveToFileExplorerSpot()
+  ; Utilities
+  CapsLock & z::Send, ^z
+  CapsLock & x::Send, ^x
+  CapsLock & c::Send, ^c
+  CapsLock & v::Send, ^v
+  CapsLock & s::Send, ^s
+  CapsLock & a::Send, ^a
+  CapsLock & d::Delete
+  CapsLock & b::activateSearchMenu()
   Capslock & Tab::Click
-  CapsLock & n::openWindowsNotification()
 
-  ; General
-  Capslock & space::Escape
+  ; Navigation
   CapsLock & h::Left
   CapsLock & j::Down
   CapsLock & k::Up
@@ -56,25 +61,25 @@
 
   Capslock & y::Home
   CapsLock & o::End
-
   CapsLock & u::PgDn
   CapsLock & i::PgUp
 
-  CapsLock & <::BackSpace
-  CapsLock & >::Delete
+  CapsLock & e::Send,{Alt Down}{Esc}{Alt Up}
+  CapsLock & w::Send,{Alt Down}{Shift Down}{Esc}{Alt Up}{Shift Up}
+
 
   CapsLock & 1::switchDesktopByNumber(1)
   CapsLock & 2::switchDesktopByNumber(2)
   CapsLock & 3::switchDesktopByNumber(3)
   CapsLock & 4::switchDesktopByNumber(4)
   CapsLock & 5::switchDesktopByNumber(5)
-
-  CapsLock & s::switchDesktopByNumber(CurrentDesktop + 1)
-  CapsLock & a::switchDesktopByNumber(CurrentDesktop - 1)
-
-  CapsLock & c::openDitto()
-  CapsLock & v::activateSearchMenu()
-  CapsLock & d::activateAppsMenu()
+ 
+  ; Need Work
+  ; CapsLock & c::openDitto()
+  ; capslock & w::moveToFileExplorerSpot()
+  ; CapsLock & n::openWindowsNotification()
+  ; CapsLock & v::activateSearchMenu()
+  ; CapsLock & d::activateAppsMenu()
   ; --|
 
   ; Left hand numpad (Needs to be at the bottom)
@@ -99,7 +104,9 @@
 
   ; --|
 
-;--\
+
+;--\ 
+
 
 
 moveMouseForWindowSwap() {
