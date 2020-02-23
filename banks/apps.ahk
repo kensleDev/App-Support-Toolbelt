@@ -1,3 +1,24 @@
+activateAppsMenu() {
+  key=a
+  shortLabel=s_LaunchApp
+  longLabel=l_LaunchApp
+  doubleLabel=d_LaunchApp
+
+  KeyWait, %key%, T0.1
+
+    If (ErrorLevel) {
+      Gosub, %longLabel% ; Send long
+    }
+    Else {
+      KeyWait, %key%, D T0.1
+      if (ErrorLevel)
+        Gosub, %shortLabel% ; Send single
+      else
+        Gosub, %doubleLabel% ; Send double
+    }
+    KeyWait, %key%
+}
+
 
 appBank() {
 

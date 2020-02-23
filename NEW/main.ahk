@@ -60,9 +60,9 @@ Menu, Tray, Icon, img/icon.png
 
   ; Remaps
 
-    CapsLock & /::sendKey(backslash)
-    CapsLock & `;::sendKey(backtick)
-    CapsLock & '::sendKey(pipe)
+    CapsLock & /::sendKey("backslash")
+    CapsLock & `;::sendKey("backtick")
+    CapsLock & '::sendKey("pipe")
 
   ;---|
 
@@ -72,7 +72,3 @@ Menu, Tray, Icon, img/icon.png
 
 
 ; --|
-
-
-
-

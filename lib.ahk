@@ -318,6 +318,15 @@
       }
     }
 
+    openDitto() {
+      x := (A_ScreenWidth // 2 - 200)
+      y := (A_ScreenHeight // 2 - 200)
+      mousemove, x, y
+      Send, ^!+c
+      Send, ^!+c
+    }
+
+
 
   ; --|
 

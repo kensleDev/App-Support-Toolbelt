@@ -22,7 +22,7 @@
 
 ; --|
 
-; -------------------------> Banks
+; -------------------------> Imports
 
   #Include, banks/search.ahk
 
@@ -42,103 +42,39 @@
 
   ; Navigation
 
-    ; Need Work
-    Capslock & q::send, ^#k
-    CapsLock & n::openWindowsNotification()
+  ; Need Work
+  capslock & w::moveToFileExplorerSpot()
+  Capslock & Tab::Click
+  CapsLock & n::openWindowsNotification()
 
-    ; General
-    Capslock & space::Escape
-    CapsLock & h::Left
-    CapsLock & j::Down
-    CapsLock & k::Up
-    CapsLock & l::Right
+  ; General
+  Capslock & space::Escape
+  CapsLock & h::Left
+  CapsLock & j::Down
+  CapsLock & k::Up
+  CapsLock & l::Right
 
-    Capslock & o::Home
-    CapsLock & p::End
+  Capslock & y::Home
+  CapsLock & o::End
 
-    ; Smooth Page up and down
-    CapsLock & x::smoothPager("Down")
-    CapsLock & z::smoothPager("Up")
+  CapsLock & u::PgDn
+  CapsLock & i::PgUp
 
-    CapsLock & 1::switchDesktopByNumber(1)
-    CapsLock & 2::switchDesktopByNumber(2)
-    CapsLock & 3::switchDesktopByNumber(3)
-    CapsLock & 4::switchDesktopByNumber(4)
-    CapsLock & 5::switchDesktopByNumber(5)
+  CapsLock & <::BackSpace
+  CapsLock & >::Delete
 
-    CapsLock & s::switchDesktopByNumber(CurrentDesktop + 1)
-    CapsLock & a::switchDesktopByNumber(CurrentDesktop - 1)
-    ;^!c::createVirtualDesktop()
-    ;^!d::deleteVirtualDesktop()
+  CapsLock & 1::switchDesktopByNumber(1)
+  CapsLock & 2::switchDesktopByNumber(2)
+  CapsLock & 3::switchDesktopByNumber(3)
+  CapsLock & 4::switchDesktopByNumber(4)
+  CapsLock & 5::switchDesktopByNumber(5)
 
-    CapsLock & b:: layoutWindows(1, true)
-    CapsLock & g:: fifthsMenu(1)
+  CapsLock & s::switchDesktopByNumber(CurrentDesktop + 1)
+  CapsLock & a::switchDesktopByNumber(CurrentDesktop - 1)
 
-
-  ; --|
-
-  ; Custom
-
-    ; Ditto Clipboard manager (Move to center and launch)
-      CapsLock & c::
-        x := (A_ScreenWidth // 2 - 200)
-        y := (A_ScreenHeight // 2 - 200)
-        mousemove, x, y
-        Send, #!c
-      Return
-    ; --|
-
-    ; Search Menu
-      CapsLock & v::
-
-        key=s
-        shortLabel=s_Search
-        longLabel=l_Search
-        doubleLabel=d_Search
-
-        KeyWait, %key%, T0.1
-
-          If (ErrorLevel) {
-            Gosub, %longLabel% ; Send long
-            ; MsgBox, longg
-          }
-          Else {
-            KeyWait, %key%, D T0.1
-            if (ErrorLevel)
-              Gosub, %shortLabel% ; Send single
-              ; MsgBox, Single
-            else
-              Gosub, %doubleLabel% ; Send double
-              ; MsgBox, double
-          }
-          KeyWait, %key%
-      Return
-    ; --|
-
-    ; Launch Apps Menu
-      CapsLock & d::
-
-        key=a
-        shortLabel=s_LaunchApp
-        longLabel=l_LaunchApp
-        doubleLabel=d_LaunchApp
-
-        KeyWait, %key%, T0.1
-
-          If (ErrorLevel) {
-            Gosub, %longLabel% ; Send long
-          }
-          Else {
-            KeyWait, %key%, D T0.1
-            if (ErrorLevel)
-              Gosub, %shortLabel% ; Send single
-            else
-              Gosub, %doubleLabel% ; Send double
-          }
-          KeyWait, %key%
-      Return
-    ; --|
-
+  CapsLock & c::openDitto()
+  CapsLock & v::activateSearchMenu()
+  CapsLock & d::activateAppsMenu()
   ; --|
 
   ; Left hand numpad (Needs to be at the bottom)
@@ -165,11 +101,43 @@
 
 ;--\
 
-#IfWinActive ahk_class CabinetWClass ; Windows Explorer
-    #Space::
-        ControlFocus, DirectUIHWND3, A
-        SendInput, {Space}
-        return
-#IfWinActive
 
-Capslock & t::send, ^{Space}
+moveMouseForWindowSwap() {
+
+  WinGet, Program, ProcessName, A
+  SplitPath, Program,,,, OutNameNoExt
+  StringLower, CleanProgramName, OutNameNoExt
+
+  if (CleanProgramName = "explorer") {
+    moveToFileExplorerSpot()
+  } else if (CleanProgramName = "chrome") {
+    moveToFileExplorerSpot()
+  } else if (CleanProgramName = "code") {
+    moveToFileExplorerSpot()
+  } else {
+    MouseMove, 0, 0
+  }
+
+}
+
+moveToFileExplorerSpot() {
+  MoveMouseX = 250
+  MoveMouseY = 140
+  MouseMove, %MoveMouseX%, %MoveMouseY%
+}
+
+; #IfWinActive ahk_class CabinetWClass ; Windows Explorer
+;   #Space::
+;       ControlFocus, DirectUIHWND3, A
+;       SendInput, {Space}
+;       return
+; #IfWinActive
+
+; Capslock & t::send, ^{Space}
+; Smooth Page up and down
+; CapsLock & i::smoothPager("Down")
+; CapsLock & u::smoothPager("Up")
+;^!c::createVirtualDesktop()
+;^!d::deleteVirtualDesktop()
+; CapsLock & b:: layoutWindows(1, true)
+; CapsLock & g:: fifthsMenu(1)
