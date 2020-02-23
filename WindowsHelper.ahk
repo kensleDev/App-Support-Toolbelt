@@ -52,6 +52,7 @@
   CapsLock & d::Delete
   CapsLock & b::activateSearchMenu()
   Capslock & Tab::Click
+  CapsLock & l::Send, ^l
 
   ; Navigation
   CapsLock & h::Left
