@@ -1,83 +1,75 @@
+# Windows Helper
 
-# The Hidden Modifer
+The modifier keys are positioned in such a way that you are required to move your hands away from the home row to use them.
 
-- This script works by disabling the caps lock keys functionaily and using it as a modifer key.
+Capslock is positioned in a much more convenient spot and gets a lot less use.
 
-- The Caps lock key can still be enabled by pressing shift + Capslock which saves me alot of frustration not being able to hit Caps by mistake.
+This script disables capslock to allow it to be used as a NEW modifier. It means you don't need to be worried about overwriting shortcuts used by other apps.
 
-- The placement of the caps key makes it for me the most erganomic modifer key and feels very natural to use
+To consume this new modifier I've created an extended layer that is constantly being adapted as needed. It allows for much faster navigation of the system with minimal moving of your hands.
 
-- Caps & {key} can then be used to do anything auto hot key can
+Using AutoHotKey it's easy to map keystrokes; launch apps; run macros using any key you wish.
 
-- Current features are app launching and the ability to search websites from anywhere on your computer
+The script supports:
+```
+Caps + key
+Caps + Shift + key
+Caps + Alt + key
+```
+I've not included Ctrl as it's awkward to hit while pressing caps but the script could easier be adapter to include it or other modifier combinations.
 
-- Also includes navgation shortcuts that I find handy for keyboard focused operation of windows
+# Install
 
-- Has functionailty to map double and long presses
+- Move the script folder to where ever you like and create a shortcut to Windows-Helper.ahk. 
 
-## Requirements / Setup
-- Requires [Auto Hot Key](https://www.autohotkey.com/)
+- Before moving the shortcut: right click -> properties -> advanced -> run as administrator
 
-- make a shortcut to WindowsHelper.ahk and place in your startup folder (type shell:startup in windows explorer bar)
+- Some keystrokes do not work without admin access, I'm not sure of the extent of it but I know the F keys won't work without.
 
-- Currently everything is hardcoded (go to the corrosponding file in the banks folder to update config atm) and I plan to add a config file/ gui for picking what apps / folers are launched.
+# Keymap
 
+See [keymap](keymap.md)  for all binds
 
-## Keymap
+Or to edit the key map do the following:
 
-  |  **Combo** | **Launch Mode** | **Action** |
-  |  :------ | :------ | :------ |
-  |  CAPS+Q | Single | Trigger Search |
-  |   |  |  |
-  |  CAPS+D | Single | Launch Apps |
-  |   |  |  |
-  |  CAPS+Z | Double | Launch Search |
-  |   |  |  |
-  |  CAPS+Z | Single | Launch Ditto |
-  |   |  |  |
-  |  CAPS+S | Single | Next Virtual Desktop |
-  |   |  |  |
-  |  CAPS+A | Single | Previous Virtual Desktop |
-  |   |  |  |
-
-
-## Navigation
-
-  |  **Combo** | **Launch Mode** | **Action** |
-  |  :------ | :------ | :------ |
-  |  CAPS+Space | Single | Escape |
-  |   |  |  |
-  |  CAPS+H | Single | Left |
-  |   |  |  |
-  |  CAPS+J | Single | Down |
-  |   |  |  |
-  |  CAPS+K | Single | Up |
-  |   |  |  |
-  |  CAPS+L | Single | Right |
-  |   |  |  |
-
-
-## The Magic
-
-This is what makes caps a modifier, for your own scripts
+In keymap.ahk you will see that the actions for each keybind are wrapped in a cmd function:
 
 ```
-  #Persistent
-  SetCapsLockState, AlwaysOff
-  ; Caps Lock Disable
-  capslock::return
-  ; Caps Lock with shift+caps
-  +Capslock::
-    If GetKeyState("CapsLock", "T") = 1
-        SetCapsLockState, AlwaysOff
-    Else
-        SetCapsLockState, AlwaysOn
-  Return
+CapsLock & ?::cmd("\",  "", "")
+
+; Function Reference
+; cmd(Caps, Caps with Shift, Caps with Alt)
+```
+The function takes 3 arguments, the first being the action for Caps+key, the second Caps+Shift+key and the last Caps+Alt+key. 
+It's wrapping the Autohotkey Send command so accepts anything that Send does - [docs](https://www.autohotkey.com/docs/commands/Send.htm).
+
+To send a macro instead of a key combo remove the cmd function and replace with your macro
+```
+CapsLock & ?::myMacro()
+
+or 
+
+CapsLock & ?::
+  msgBox, this is a test
+Return
 ```
 
-# Todo
+Be aware that you will loose modifier functionality and will have to implement this yourself. This can be easily done by modifying / re-implementing  the cmd function.
 
-- Style Menus
-- Add features back in slowly
-- Extract settings to ini files for easier config
-- Finish documentation
+# Dependancies (kind of)
+
+There are a few apps that I use for managing my system:
+
+- Ditto - Clipboard manager
+- Wox - Omni launcher - like Alfred or Spotlight on mac 
+- Beeftext - Text expander / Snippet manager
+
+The script has hotkeys to launch these apps so they the script technically isn't dependent on them as the script sends the key combo required for launching it.
+This means you could change these to whatever you wish. The 3 binds are: 
+```
+Caplock + p
+Capslock + [
+Capslock + ]
+```
+
+
