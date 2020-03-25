@@ -1,4 +1,4 @@
-# Windows Helper
+# Windows Extended Keyboard
 
 The modifier keys are positioned in such a way that you are required to move your hands away from the home row to use them.
 
