@@ -16,14 +16,16 @@ cmd(cmd, shiftCmd, altCmd) {
 SetCapsLockState, AlwaysOff
 capslock::Escape
 
+path=E:\Dev\repos\Windows-Helper\settings.ini
+
 ; cmd(Caps, Caps with Shift, Caps with Alt  )
 ; top row 
 
 Capslock & Tab::cmd("{Click}", "", "")
 
-Capslock & q::cmd("{Enter}", "", "#{Up}")
-CapsLock & w::cmd("!+{Escape}", "", "#{Left}")
-CapsLock & e::cmd("!{Escape}", "", "#{Right}")
+Capslock & q::cmd("{Enter}", "#{Up}", "")
+CapsLock & w::cmd("!+{Escape}", "#{Left}", "")
+CapsLock & e::cmd("!{Escape}", "#{Right}", "")
 
 Capslock & y::cmd("{Home}", "+{Home}", "!{Home}")
 CapsLock & o::cmd("{End}", "+{End}", "!{Home}")
@@ -39,6 +41,7 @@ CapsLock & #::cmd("|", "", "")
 CapsLock & a::cmd("^a", "^+a", "")
 CapsLock & s::cmd("^s", "^+s", "")
 CapsLock & d::cmd("{Delete}", "+{Delete}", "")
+CapsLock & f::cmd("{Backspace}", "+{Backspace}", "")
 
 CapsLock & h::cmd("{Left}", "+{Left}", "!{Left}")
 CapsLock & j::cmd("{Down}", "+{Down}", "!{Down}")
@@ -53,8 +56,11 @@ CapsLock & x::cmd("^x", "^+x", "")
 CapsLock & c::cmd("^c", "^+c", "")
 CapsLock & v::cmd("^v", "^+v", "")
 
+CapsLock & .::cmd("!{F4}", "", "")
 CapsLock & ?::cmd("\", "", "")
 
+; bottom row
+Appskey::Media_Play_Pause 
 
 ; Num Keys
 CapsLock & 1::cmd("{F1}", "+{F1}", "!{F1}")
@@ -71,5 +77,3 @@ CapsLock & -::cmd("{F11}", "+{F11}", "!{F11}")
 CapsLock & =::cmd("{F12}", "+{F12}", "!{F12}")
 ; --|
 
-
-     

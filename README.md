@@ -18,7 +18,7 @@ Caps + Alt + key
 ```
 I've not included Ctrl as it's awkward to hit while pressing caps but the script could easier be adapter to include it or other modifier combinations.
 
-# Install
+# 💻 Install
 
 - Move the script folder to where ever you like and create a shortcut to Windows-Helper.ahk. 
 
@@ -26,7 +26,7 @@ I've not included Ctrl as it's awkward to hit while pressing caps but the script
 
 - Some keystrokes do not work without admin access, I'm not sure of the extent of it but I know the F keys won't work without.
 
-# Keymap
+# ⌨ Keymap
 
 See [keymap](keymap.md)  for all binds
 
@@ -56,7 +56,7 @@ Return
 
 Be aware that you will loose modifier functionality and will have to implement this yourself. This can be easily done by modifying / re-implementing  the cmd function.
 
-# Dependancies (kind of)
+# 💞 Dependancies (kind of)
 
 There are a few apps that I use for managing my system:
 
@@ -72,11 +72,14 @@ Capslock + [
 Capslock + ]
 ```
 
-
-# Todo
+# 📋 Todo
 
 - Possibly add CTRL modifier - as mentioned it can be awkward to press when pressing Caps at the same time which is what i'm trying to stay away from. The issue is that there are alot of standard commands that rely on CTRL.
 
 - Create visual documentation & hotkey - I'm looking at creating a few images to better demonstate the keybinds at glance. This could then be triggered by a hotkey from anywhere.
 
 - User config - initally thinking about a config file which will allow the user to change the hotkeys without knowlegdge of autohotkey. Although I don't think this approach will work if generating an exe which is the ultimate goal. Becuase of this I may look at a GUI config.
+
+# 🐛 Known Issues
+
+- When pressing Capslock + alt, due to Capslock being mapped to escape it will swap apps. To aviod this make sure to press Capslock first. This might be fixed by reconising long presses vs taps.
