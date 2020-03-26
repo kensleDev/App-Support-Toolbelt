@@ -2,9 +2,54 @@
 Capslock + key + modifer = action 
 |key|modifer|action|
 |----|----|----|
-|?| |\| 
+|w| |Alt + Shift + Escape| 
+|w| Alt |#Left| 
+||||
+|e| |Alt + Escape| 
+|e| Alt |#Right| 
+||||
+|o| |End| 
+|o| Shift |Shift + End| 
+|o| Alt |Alt + Home| 
+||||
+|u| |PgDn| 
+|u| Shift |Shift + PgDn| 
+|u| Alt |Alt + Home| 
+||||
+|i| |PgUp| 
+|i| Shift |Shift + PgUp| 
+|i| Alt |Alt + Home| 
+||||
+|p| |Alt + Space| 
+||||
+|[| |Alt + Crtl + '| 
 ||||
 |#| ||| 
+||||
+|a| |Crtl + a| 
+|a| Shift |Crtl + Shift + a| 
+||||
+|s| |Crtl + s| 
+|s| Shift |Crtl + Shift + s| 
+||||
+|d| |Delete| 
+|d| Shift |Shift + Delete| 
+||||
+|h| |Left| 
+|h| Shift |Shift + Left| 
+|h| Alt |Alt + Left| 
+||||
+|j| |Down| 
+|j| Shift |Shift + Down| 
+|j| Alt |Alt + Down| 
+||||
+|k| |Up| 
+|k| Shift |Shift + Up| 
+|k| Alt |Alt + Up| 
+||||
+|l| |Right| 
+|l| Shift |Shift + Right| 
+|l| Alt |Alt + Right| 
 ||||
 |'| |``| 
 ||||
@@ -20,48 +65,7 @@ Capslock + key + modifer = action
 |v| |Crtl + v| 
 |v| Shift |Crtl + Shift + v| 
 ||||
-|s| |Crtl + s| 
-|s| Shift |Crtl + Shift + s| 
-||||
-|a| |Crtl + a| 
-|a| Shift |Crtl + Shift + a| 
-||||
-|d| |Delete| 
-|d| Shift |Shift + Delete| 
-||||
-|h| |Left| 
-|h| Shift |Shift + Left| 
-|h| Alt |"| 
-||||
-|j| |Down| 
-|j| Shift |Shift + Down| 
-|j| Alt |"| 
-||||
-|k| |Up| 
-|k| Shift |Shift + Up| 
-|k| Alt |"| 
-||||
-|l| |Right| 
-|l| Shift |Shift + Right| 
-|l| Alt |"| 
-||||
-|o| |End| 
-|o| Shift |Shift + End| 
-|o| Alt |"| 
-||||
-|u| |PgDn| 
-|u| Shift |Shift + PgDn| 
-||||
-|i| |PgUp| 
-|i| Shift |Shift + PgUp| 
-||||
-|e| |Alt + Escape| 
-||||
-|w| |Alt + Shift + Escape| 
-||||
-|p| |Alt + Space| 
-||||
-|[| |Alt + Crtl + '| 
+|?| |\| 
 ||||
 |1| |F1| 
 |1| Shift |Shift + F1| 

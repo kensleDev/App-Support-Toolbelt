@@ -1,3 +1,4 @@
+
 cmd(cmd, shiftCmd, altCmd) {
 
   if GetKeyState("Shift", cmd) {
@@ -16,41 +17,44 @@ SetCapsLockState, AlwaysOff
 capslock::Escape
 
 ; cmd(Caps, Caps with Shift, Caps with Alt  )
+; top row 
 
-; Symbols 
-CapsLock & ?::cmd("\", "", "")
+Capslock & Tab::cmd("{Click}", "", "")
+
+Capslock & q::cmd("{Enter}", "", "#{Up}")
+CapsLock & w::cmd("!+{Escape}", "", "#{Left}")
+CapsLock & e::cmd("!{Escape}", "", "#{Right}")
+
+Capslock & y::cmd("{Home}", "+{Home}", "!{Home}")
+CapsLock & o::cmd("{End}", "+{End}", "!{Home}")
+CapsLock & u::cmd("{PgDn}", "+{PgDn}", "!{Home}")
+CapsLock & i::cmd("{PgUp}", "+{PgUp}", "!{Home}")
+
+CapsLock & p::cmd("!{Space}", "", "")
+CapsLock & [::cmd("!^'", "", "")
 CapsLock & #::cmd("|", "", "")
+
+; second row 
+
+CapsLock & a::cmd("^a", "^+a", "")
+CapsLock & s::cmd("^s", "^+s", "")
+CapsLock & d::cmd("{Delete}", "+{Delete}", "")
+
+CapsLock & h::cmd("{Left}", "+{Left}", "!{Left}")
+CapsLock & j::cmd("{Down}", "+{Down}", "!{Down}")
+CapsLock & k::cmd("{Up}", "+{Up}", "!{Up}")
+CapsLock & l::cmd("{Right}", "+{Right}", "!{Right}")
+
 CapsLock & '::cmd("``", "", "")
 
-; Utilities
+; third row 
 CapsLock & z::cmd("^z", "^+z", "")
 CapsLock & x::cmd("^x", "^+x", "")
 CapsLock & c::cmd("^c", "^+c", "")
 CapsLock & v::cmd("^v", "^+v", "")
-CapsLock & s::cmd("^s", "^+s", "")
-CapsLock & a::cmd("^a", "^+a", "")
-CapsLock & d::cmd("{Delete}", "+{Delete}", "")
-Capslock & Tab::cmd("{Click}", "", "")
-Capslock & q::cmd("{Enter}", "", "")
 
-; Navigation
-CapsLock & h::cmd("{Left}", "+{Left}",  "")
-CapsLock & j::cmd("{Down}", "+{Down}",  "")
-CapsLock & k::cmd("{Up}", "+{Up}",  "")
-CapsLock & l::cmd("{Right}", "+{Right}",  "")
+CapsLock & ?::cmd("\", "", "")
 
-Capslock & y::cmd("{Home}", "+{Home}", "")
-CapsLock & o::cmd("{End}", "+{End}",  "")
-CapsLock & u::cmd("{PgDn}", "+{PgDn}", "")
-CapsLock & i::cmd("{PgUp}", "+{PgUp}", "")
-
-; instant alt tab
-CapsLock & e::cmd("!{Escape}", "", "")
-CapsLock & w::cmd("!+{Escape}", "", "")
-
-; Applications
-CapsLock & p::cmd("!{Space}", "", "")
-CapsLock & [::cmd("!^'", "", "")
 
 ; Num Keys
 CapsLock & 1::cmd("{F1}", "+{F1}", "!{F1}")
@@ -67,3 +71,5 @@ CapsLock & -::cmd("{F11}", "+{F11}", "!{F11}")
 CapsLock & =::cmd("{F12}", "+{F12}", "!{F12}")
 ; --|
 
+
+     
