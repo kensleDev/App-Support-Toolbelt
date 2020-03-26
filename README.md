@@ -73,3 +73,10 @@ Capslock + ]
 ```
 
 
+# Todo
+
+- Possibly add CTRL modifier - as mentioned it can be awkward to press when pressing Caps at the same time which is what i'm trying to stay away from. The issue is that there are alot of standard commands that rely on CTRL.
+
+- Create visual documentation & hotkey - I'm looking at creating a few images to better demonstate the keybinds at glance. This could then be triggered by a hotkey from anywhere.
+
+- User config - initally thinking about a config file which will allow the user to change the hotkeys without knowlegdge of autohotkey. Although I don't think this approach will work if generating an exe which is the ultimate goal. Becuase of this I may look at a GUI config.
