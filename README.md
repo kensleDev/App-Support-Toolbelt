@@ -40,7 +40,7 @@ CapsLock & ?::cmd("\",  "", "")
 ; Function Reference
 ; cmd(Caps, Caps with Shift, Caps with Alt)
 ```
-The function takes 3 arguments, the first being the action for Caps+key, the second Caps+Shift+key and the last Caps+Alt+key. 
+The function takes 3 arguments, the first being the action for Caps+key, the second Caps+Shift+key and the last Caps+Alt+key. o
 It's wrapping the Autohotkey Send command so accepts anything that Send does - [docs](https://www.autohotkey.com/docs/commands/Send.htm).
 
 To send a macro instead of a key combo remove the cmd function and replace with your macro
